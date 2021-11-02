@@ -5,6 +5,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/now_playing_tv_page.dart';
 import 'package:ditonton/presentation/pages/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tv_page.dart';
+import 'package:ditonton/presentation/pages/tv_search_page.dart';
 import 'package:ditonton/presentation/pages/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_drawer.dart';
@@ -37,7 +38,7 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
           IconButton(
               icon: Icon(Icons.search),
               onPressed: (){
-
+                Navigator.pushNamed(context, TvSearchPage.ROUTE_NAME);
               },
           ),
         ],

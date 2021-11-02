@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NowPlayingTvPage extends StatefulWidget {
-  static const ROUTE_NAME = 'now-playing-tv';
+  static const ROUTE_NAME = '/now-playing-tv';
   @override
   _NowPlayingTvPageState createState() => _NowPlayingTvPageState();
 }
