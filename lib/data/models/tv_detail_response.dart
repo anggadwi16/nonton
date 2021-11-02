@@ -3,25 +3,25 @@ import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class TvDetailResponse extends Equatable{
-  final bool adult;
+  final bool? adult;
   final String? backdropPath;
-  final int budget;
+  final int? budget;
   final List<GenreModel> genres;
   final String homepage;
   final int id;
   final String? imdbId;
   final String originalLanguage;
-  final String originalTitle;
+  final String? originalTitle;
   final String overview;
   final double popularity;
   final String posterPath;
-  final String releaseDate;
-  final int revenue;
-  final int runtime;
+  final String? releaseDate;
+  final int? revenue;
+  final int? runtime;
   final String status;
   final String tagline;
-  final String title;
-  final bool video;
+  final String? title;
+  final bool? video;
   final double voteAverage;
   final int voteCount;
 
@@ -101,16 +101,16 @@ class TvDetailResponse extends Equatable{
 
   TvDetail toEntity(){
     return TvDetail(
-      adult: this.adult,
+      adult: this.adult ?? false,
       backdropPath: this.backdropPath,
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
       id: this.id,
-      originalTitle: this.originalTitle,
+      originalTitle: this.originalTitle ?? '',
       overview: this.overview,
       posterPath: this.posterPath,
-      releaseDate: this.releaseDate,
-      runtime: this.runtime,
-      title: this.title,
+      releaseDate: this.releaseDate ?? '',
+      runtime: this.runtime ?? 0,
+      title: this.title ?? '',
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
     );

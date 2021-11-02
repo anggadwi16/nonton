@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/presentation/pages/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_drawer.dart';
 import 'package:flutter/material.dart';
@@ -140,7 +141,7 @@ class TvList extends StatelessWidget {
             padding: EdgeInsets.all(8),
             child: InkWell(
               onTap: (){
-
+                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME, arguments: tv.id);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
