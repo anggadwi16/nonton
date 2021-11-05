@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class TvDetailNotifier extends ChangeNotifier{
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
-  static const watchlistRemoveSuccessMessage = 'Remove from Watchlist';
+  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   final GetTvDetail getTvDetail;
   final GetTvRecommendations getTvRecommendations;
