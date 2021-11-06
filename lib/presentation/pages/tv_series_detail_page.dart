@@ -94,7 +94,7 @@ class DetailContent extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(tv.title, style: kHeading5,),
+                            Text(tv.name, style: kHeading5,),
                             ElevatedButton(
                               onPressed: () async{
                                 if(!isAddedWatchlist){
