@@ -1,4 +1,5 @@
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
@@ -17,6 +18,7 @@ class TvDetailResponse extends Equatable{
   final String? name;
   final double voteAverage;
   final int voteCount;
+  final List<SeasonModel> seasons;
 
   TvDetailResponse({
     required this.backdropPath,
@@ -33,6 +35,7 @@ class TvDetailResponse extends Equatable{
     required this.name,
     required this.voteAverage,
     required this.voteCount,
+    required this.seasons,
   });
 
   factory TvDetailResponse.fromJson(Map<String, dynamic> json) =>
@@ -52,6 +55,8 @@ class TvDetailResponse extends Equatable{
         name: json["name"],
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
+        seasons:  List<SeasonModel>.from(
+            json["seasons"].map((x) => SeasonModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -69,6 +74,7 @@ class TvDetailResponse extends Equatable{
     "name": name,
     "vote_average": voteAverage,
     "vote_count": voteCount,
+    "seasons": seasons,
   };
 
   TvDetail toEntity(){
@@ -82,6 +88,7 @@ class TvDetailResponse extends Equatable{
       name: this.name ?? '',
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
+      seasons: this.seasons.map((season) => season.toEntity()).toList(),
     );
   }
 
@@ -101,5 +108,6 @@ class TvDetailResponse extends Equatable{
     name,
     voteAverage,
     voteCount,
+    seasons,
   ];
 }

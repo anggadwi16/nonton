@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
@@ -190,6 +191,36 @@ class DetailContent extends StatelessWidget {
                                   return Container();
                                 }
                               },
+                            ),
+                            Text('Season', style: kHeading6,),
+                            Container(
+                              height: 170,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: tv.seasons.length,
+                                itemBuilder: (context, index){
+                                  Season season = tv.seasons[index];
+                                  return Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        CachedNetworkImage(
+                                          imageUrl: 'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                                          height: 100,
+                                          placeholder: (context, url) => Center(
+                                              child: CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) => Icon(Icons.image_not_supported),
+                                        ),
+                                        SizedBox(height: 8,),
+                                        Text(season.name,),
+                                        Text('Total Episode ${season.episodeCount}'),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         ),
