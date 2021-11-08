@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/path.jpg",
+      "first_air_date": "2021-09-17",
+      "genre_ids": [
+        10759,
+        9648,
+        18
+      ],
+      "id": 93405,
+      "name": "Squid Game",
+      "origin_country": [
+        "KR"
+      ],
+      "original_language": "ko",
+      "original_name": "Squid Game",
+      "overview": "overview",
+      "popularity": 2730.117,
+      "poster_path": "/path.jpg",
+      "vote_average": 7.8,
+      "vote_count": 8590
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 6
+}

@@ -12,6 +12,10 @@ class TvResponse extends Equatable{
       .where((element) => element.posterPath != null)),
   );
 
+  Map<String, dynamic> toJson() => {
+    'results' : List<dynamic>.from(tvList.map((e) => e.toJson())),
+  };
+
   @override
   List<Object?> get props => [
     tvList
