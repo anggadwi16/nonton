@@ -46,7 +46,7 @@ class DatabaseHelper {
     batch.execute('''
       CREATE TABLE  $_tblWatchlistTVSeries (
         id INTEGER PRIMARY KEY,
-        title TEXT,
+        name TEXT,
         overview TEXT,
         posterPath TEXT
       );
