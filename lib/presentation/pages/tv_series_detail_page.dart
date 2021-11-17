@@ -173,6 +173,48 @@ class DetailContent extends StatelessWidget {
                               height: 16,
                             ),
                             Text(
+                              'Season',
+                              style: kHeading6,
+                            ),
+                            Container(
+                              height: 170,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: tv.seasons.length,
+                                itemBuilder: (context, index) {
+                                  Season season = tv.seasons[index];
+                                  return Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        CachedNetworkImage(
+                                          imageUrl:
+                                          'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                                          height: 100,
+                                          placeholder: (context, url) => Center(
+                                              child:
+                                              CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.image_not_supported),
+                                        ),
+                                        SizedBox(
+                                          height: 8,
+                                        ),
+                                        Text(
+                                          season.name,
+                                        ),
+                                        Text(
+                                            'Total Episode ${season.episodeCount}'),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            Text(
                               'Recommendations',
                               style: kHeading6,
                             ),
@@ -229,48 +271,6 @@ class DetailContent extends StatelessWidget {
                                   return Container();
                                 }
                               },
-                            ),
-                            Text(
-                              'Season',
-                              style: kHeading6,
-                            ),
-                            Container(
-                              height: 170,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: tv.seasons.length,
-                                itemBuilder: (context, index) {
-                                  Season season = tv.seasons[index];
-                                  return Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CachedNetworkImage(
-                                          imageUrl:
-                                              'https://image.tmdb.org/t/p/w500${season.posterPath}',
-                                          height: 100,
-                                          placeholder: (context, url) => Center(
-                                              child:
-                                                  CircularProgressIndicator()),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(Icons.image_not_supported),
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          season.name,
-                                        ),
-                                        Text(
-                                            'Total Episode ${season.episodeCount}'),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
                             ),
                           ],
                         ),
