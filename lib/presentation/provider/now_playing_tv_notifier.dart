@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_tv.dart';
 import 'package:flutter/material.dart';
 
-class NowPlayingTvNotifier extends ChangeNotifier{
+class NowPlayingTvNotifier extends ChangeNotifier {
   final GetNowPlayingTv getNowPlayingTv;
   NowPlayingTvNotifier(this.getNowPlayingTv);
 
@@ -16,7 +16,7 @@ class NowPlayingTvNotifier extends ChangeNotifier{
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchNowPlayingTv() async{
+  Future<void> fetchNowPlayingTv() async {
     _state = RequestState.Loading;
     notifyListeners();
 

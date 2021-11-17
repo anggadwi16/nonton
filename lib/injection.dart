@@ -56,9 +56,9 @@ void init() {
   );
   locator.registerFactory(
     () => TvListNotifier(
-        getNowPlayingTv: locator(),
-        getPopularTv: locator(),
-        getTopRatedTv: locator(),
+      getNowPlayingTv: locator(),
+      getPopularTv: locator(),
+      getTopRatedTv: locator(),
     ),
   );
   locator.registerFactory(
@@ -70,7 +70,8 @@ void init() {
       removeWatchlist: locator(),
     ),
   );
-  locator.registerFactory(() => TvDetailNotifier(
+  locator.registerFactory(
+    () => TvDetailNotifier(
       getTvDetail: locator(),
       getTvRecommendations: locator(),
       getWatchlistTvStatus: locator(),
@@ -135,8 +136,8 @@ void init() {
   );
   locator.registerLazySingleton<TvRepository>(
     () => TvRepositoryImpl(
-        remoteDataSource: locator(),
-        localDataSource: locator(),
+      remoteDataSource: locator(),
+      localDataSource: locator(),
     ),
   );
 
@@ -148,7 +149,7 @@ void init() {
   locator.registerLazySingleton<TvRemoteDataSource>(
       () => TvRemoteDataSourceImpl(client: locator()));
   locator.registerLazySingleton<TvLocalDataSource>(
-      () => TvLocalDataSourceImpl(databaseHelper: locator()),
+    () => TvLocalDataSourceImpl(databaseHelper: locator()),
   );
 
   // helper

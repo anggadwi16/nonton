@@ -25,7 +25,7 @@ class _TvSearchPageState extends State<TvSearchPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query){
+              onSubmitted: (query) {
                 Provider.of<TvSearchNotifier>(context, listen: false)
                     .fetchTvSearch(query);
               },
@@ -36,27 +36,32 @@ class _TvSearchPageState extends State<TvSearchPage> {
               ),
               textInputAction: TextInputAction.search,
             ),
-            SizedBox(height: 16,),
-            Text('Search Result', style: kHeading6,),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Search Result',
+              style: kHeading6,
+            ),
             Consumer<TvSearchNotifier>(
-              builder: (context, data, child){
-                if(data.state == RequestState.Loading){
+              builder: (context, data, child) {
+                if (data.state == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                }else if(data.state == RequestState.Loaded){
+                } else if (data.state == RequestState.Loaded) {
                   final result = data.searchResult;
                   return Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.all(8),
-                      itemBuilder: (context, index){
+                      itemBuilder: (context, index) {
                         final tv = data.searchResult[index];
                         return TvCard(tv);
                       },
                       itemCount: result.length,
                     ),
                   );
-                }else{
+                } else {
                   return Expanded(
                     child: Container(),
                   );

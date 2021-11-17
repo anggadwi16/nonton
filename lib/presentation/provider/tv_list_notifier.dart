@@ -5,7 +5,7 @@ import 'package:ditonton/domain/usecases/get_popular_tv.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_tv.dart';
 import 'package:flutter/material.dart';
 
-class TvListNotifier extends ChangeNotifier{
+class TvListNotifier extends ChangeNotifier {
   var _nowPlayingTv = <Tv>[];
   List<Tv> get nowPlayingTv => _nowPlayingTv;
 
@@ -37,7 +37,7 @@ class TvListNotifier extends ChangeNotifier{
     required this.getTopRatedTv,
   });
 
-  Future<void> fetchNowPlayingTv() async{
+  Future<void> fetchNowPlayingTv() async {
     _nowPlayingState = RequestState.Loading;
     notifyListeners();
 
@@ -48,7 +48,7 @@ class TvListNotifier extends ChangeNotifier{
         _message = failure.message;
         notifyListeners();
       },
-      (tvData){
+      (tvData) {
         _nowPlayingState = RequestState.Loaded;
         _nowPlayingTv = tvData;
         notifyListeners();
@@ -56,7 +56,7 @@ class TvListNotifier extends ChangeNotifier{
     );
   }
 
-  Future<void> fetchPopularTv() async{
+  Future<void> fetchPopularTv() async {
     _popularTvState = RequestState.Loading;
     notifyListeners();
 
@@ -75,7 +75,7 @@ class TvListNotifier extends ChangeNotifier{
     );
   }
 
-  Future<void> fetchTopRatedTv() async{
+  Future<void> fetchTopRatedTv() async {
     _topRatedTvState = RequestState.Loading;
     notifyListeners();
 

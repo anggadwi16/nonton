@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/search_tv.dart';
 import 'package:flutter/material.dart';
 
-class TvSearchNotifier extends ChangeNotifier{
+class TvSearchNotifier extends ChangeNotifier {
   final SearchTv searchTv;
   TvSearchNotifier({required this.searchTv});
 
@@ -16,18 +16,18 @@ class TvSearchNotifier extends ChangeNotifier{
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchTvSearch(String query) async{
+  Future<void> fetchTvSearch(String query) async {
     _state = RequestState.Loading;
     notifyListeners();
 
     final result = await searchTv.execute(query);
     result.fold(
-      (failure){
+      (failure) {
         _message = failure.message;
         _state = RequestState.Error;
         notifyListeners();
       },
-      (tvData){
+      (tvData) {
         _searchResult = tvData;
         _state = RequestState.Loaded;
         notifyListeners();

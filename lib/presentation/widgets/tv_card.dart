@@ -13,15 +13,17 @@ class TvCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
-        onTap: (){
-          Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME, arguments: tv.id);
+        onTap: () {
+          Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME,
+              arguments: tv.id);
         },
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
             Card(
               child: Container(
-                margin: EdgeInsets.only(left: 16 + 80 + 16, bottom: 8, right: 8),
+                margin:
+                    EdgeInsets.only(left: 16 + 80 + 16, bottom: 8, right: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -31,7 +33,9 @@ class TvCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Text(
                       tv.overview ?? '-',
                       maxLines: 2,

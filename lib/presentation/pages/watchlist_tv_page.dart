@@ -19,26 +19,27 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> {
             .fetchWatchlistTv());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(8),
         child: Consumer<WatchlistTvNotifier>(
-          builder: (context, data, child){
-            if(data.watchlistState == RequestState.Loading){
+          builder: (context, data, child) {
+            if (data.watchlistState == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            }else if(data.watchlistState == RequestState.Loaded){
+            } else if (data.watchlistState == RequestState.Loaded) {
               return ListView.builder(
                 itemCount: data.watchlistTv.length,
-                itemBuilder: (context, index){
+                itemBuilder: (context, index) {
                   final tv = data.watchlistTv[index];
                   return TvCard(tv);
                 },
               );
-            }else{
+            } else {
               return Center(
                 key: Key('error_message'),
                 child: Text(data.message),

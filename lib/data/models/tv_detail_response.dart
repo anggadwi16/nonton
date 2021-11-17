@@ -3,7 +3,7 @@ import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
-class TvDetailResponse extends Equatable{
+class TvDetailResponse extends Equatable {
   final String? backdropPath;
   final List<GenreModel> genres;
   final String homepage;
@@ -55,29 +55,29 @@ class TvDetailResponse extends Equatable{
         name: json["name"],
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
-        seasons:  List<SeasonModel>.from(
+        seasons: List<SeasonModel>.from(
             json["seasons"].map((x) => SeasonModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-    "backdrop_path": backdropPath,
-    "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
-    "homepage": homepage,
-    "id": id,
-    "original_language": originalLanguage,
-    "original_name": originalName,
-    "overview": overview,
-    "popularity": popularity,
-    "poster_path": posterPath,
-    "status": status,
-    "tagline": tagline,
-    "name": name,
-    "vote_average": voteAverage,
-    "vote_count": voteCount,
-    "seasons": seasons,
-  };
+        "backdrop_path": backdropPath,
+        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
+        "homepage": homepage,
+        "id": id,
+        "original_language": originalLanguage,
+        "original_name": originalName,
+        "overview": overview,
+        "popularity": popularity,
+        "poster_path": posterPath,
+        "status": status,
+        "tagline": tagline,
+        "name": name,
+        "vote_average": voteAverage,
+        "vote_count": voteCount,
+        "seasons": seasons,
+      };
 
-  TvDetail toEntity(){
+  TvDetail toEntity() {
     return TvDetail(
       backdropPath: this.backdropPath,
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
@@ -94,20 +94,20 @@ class TvDetailResponse extends Equatable{
 
   @override
   List<Object?> get props => [
-    backdropPath,
-    genres,
-    homepage,
-    id,
-    originalLanguage,
-    originalName,
-    overview,
-    popularity,
-    posterPath,
-    status,
-    tagline,
-    name,
-    voteAverage,
-    voteCount,
-    seasons,
-  ];
+        backdropPath,
+        genres,
+        homepage,
+        id,
+        originalLanguage,
+        originalName,
+        overview,
+        popularity,
+        posterPath,
+        status,
+        tagline,
+        name,
+        voteAverage,
+        voteCount,
+        seasons,
+      ];
 }

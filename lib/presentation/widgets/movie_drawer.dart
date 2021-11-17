@@ -27,7 +27,7 @@ class MovieDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.live_tv),
             title: Text('TV Series'),
-            onTap: (){
+            onTap: () {
               Navigator.pushReplacementNamed(context, TVSeriesPage.ROUTE_NAME);
             },
           ),

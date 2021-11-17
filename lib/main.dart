@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<PopularMoviesNotifier>(),
         ),
         ChangeNotifierProvider(
-            create: (_) => di.locator<PopularTvNotifier>(),
+          create: (_) => di.locator<PopularTvNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
@@ -85,7 +85,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData.dark().copyWith(
           colorScheme: kColorScheme,
           primaryColor: kRichBlack,
-          accentColor: kMikadoYellow,
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
@@ -110,7 +109,8 @@ class MyApp extends StatelessWidget {
               );
             case TvSeriesDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
-              return MaterialPageRoute(builder: (_) => TvSeriesDetailPage(id: id));
+              return MaterialPageRoute(
+                  builder: (_) => TvSeriesDetailPage(id: id));
             case SearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => SearchPage());
             case TvSearchPage.ROUTE_NAME:

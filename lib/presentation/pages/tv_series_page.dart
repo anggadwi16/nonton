@@ -21,14 +21,13 @@ class TVSeriesPage extends StatefulWidget {
 class _TVSeriesPageState extends State<TVSeriesPage> {
   @override
   void initState() {
-    Future.microtask(
-      () => Provider.of<TvListNotifier>(context, listen: false)
-        ..fetchNowPlayingTv()
-        ..fetchPopularTv()
-        ..fetchTopRatedTv()
-    );
+    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
+      ..fetchNowPlayingTv()
+      ..fetchPopularTv()
+      ..fetchTopRatedTv());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +35,10 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
         title: Text('TV Series'),
         actions: [
           IconButton(
-              icon: Icon(Icons.search),
-              onPressed: (){
-                Navigator.pushNamed(context, TvSearchPage.ROUTE_NAME);
-              },
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Navigator.pushNamed(context, TvSearchPage.ROUTE_NAME);
+            },
           ),
         ],
       ),
@@ -52,53 +51,61 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
             children: [
               _buildSubHeading(
                 title: 'Now Playing',
-                onTap: () => Navigator.pushNamed(context, NowPlayingTvPage.ROUTE_NAME),
+                onTap: () =>
+                    Navigator.pushNamed(context, NowPlayingTvPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child){
-                final state = data.nowPlayingState;
-                if(state == RequestState.Loading){
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }else if (state == RequestState.Loaded){
-                  return TvList(data.nowPlayingTv);
-                }else{
-                  return Text('Failed');
-                }
-              },),
+              Consumer<TvListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.nowPlayingState;
+                  if (state == RequestState.Loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state == RequestState.Loaded) {
+                    return TvList(data.nowPlayingTv);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
+              ),
               _buildSubHeading(
-                  title: 'Popular',
-                  onTap: () => Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
+                title: 'Popular',
+                onTap: () =>
+                    Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child){
-                final state = data.popularTvState;
-                if(state == RequestState.Loading){
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }else if(state == RequestState.Loaded){
-                  return TvList(data.popularTv);
-                }else{
-                  return Text('Failed');
-                }
-              },),
+              Consumer<TvListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.popularTvState;
+                  if (state == RequestState.Loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state == RequestState.Loaded) {
+                    return TvList(data.popularTv);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
+              ),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () => Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
+                onTap: () =>
+                    Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child){
-                final state = data.topRatedTvState;
-                if(state == RequestState.Loading){
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }else if(state == RequestState.Loaded){
-                  return TvList(data.topRatedTv);
-                }else{
-                  return Text('Failed');
-                }
-              },),
-
+              Consumer<TvListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.topRatedTvState;
+                  if (state == RequestState.Loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state == RequestState.Loaded) {
+                    return TvList(data.topRatedTv);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
+              ),
             ],
           ),
         ),
@@ -106,20 +113,20 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
     );
   }
 
-  Row _buildSubHeading({required String title, required Function() onTap}){
+  Row _buildSubHeading({required String title, required Function() onTap}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: kHeading6,),
+        Text(
+          title,
+          style: kHeading6,
+        ),
         InkWell(
           onTap: onTap,
           child: Padding(
             padding: EdgeInsets.all(8),
             child: Row(
-              children: [
-                Text('See More'),
-                Icon(Icons.arrow_forward_ios)
-              ],
+              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
             ),
           ),
         )
@@ -139,13 +146,14 @@ class TvList extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: tvSeries.length,
-        itemBuilder: (context, index){
+        itemBuilder: (context, index) {
           final tv = tvSeries[index];
           return Container(
             padding: EdgeInsets.all(8),
             child: InkWell(
-              onTap: (){
-                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME, arguments: tv.id);
+              onTap: () {
+                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME,
+                    arguments: tv.id);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -164,4 +172,3 @@ class TvList extends StatelessWidget {
     );
   }
 }
-

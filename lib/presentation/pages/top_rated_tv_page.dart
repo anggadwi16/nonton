@@ -14,8 +14,8 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
   @override
   void initState() {
     Future.microtask(() =>
-    Provider.of<TopRatedTvNotifier>(context, listen: false)
-      .fetchTopRatedTv());
+        Provider.of<TopRatedTvNotifier>(context, listen: false)
+            .fetchTopRatedTv());
     super.initState();
   }
 
@@ -28,20 +28,20 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
       body: Padding(
         padding: EdgeInsets.all(8),
         child: Consumer<TopRatedTvNotifier>(
-          builder: (context, data, child){
-            if(data.state == RequestState.Loading){
+          builder: (context, data, child) {
+            if (data.state == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            }else if(data.state == RequestState.Loaded){
+            } else if (data.state == RequestState.Loaded) {
               return ListView.builder(
-                itemBuilder: (context, index){
+                itemBuilder: (context, index) {
                   final tv = data.tv[index];
                   return TvCard(tv);
                 },
                 itemCount: data.tv.length,
               );
-            }else{
+            } else {
               return Center(
                 key: Key('error_message'),
                 child: Text(data.message),

@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv.dart';
 import 'package:flutter/cupertino.dart';
 
-class WatchlistTvNotifier extends ChangeNotifier{
+class WatchlistTvNotifier extends ChangeNotifier {
   final GetWatchlistTv getWatchlistTv;
   var _watchlistTV = <Tv>[];
   List<Tv> get watchlistTv => _watchlistTV;
@@ -16,7 +16,7 @@ class WatchlistTvNotifier extends ChangeNotifier{
 
   WatchlistTvNotifier(this.getWatchlistTv);
 
-  Future<void> fetchWatchlistTv() async{
+  Future<void> fetchWatchlistTv() async {
     _watchlistState = RequestState.Loading;
     notifyListeners();
 

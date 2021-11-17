@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_tv.dart';
 import 'package:flutter/material.dart';
 
-class TopRatedTvNotifier extends ChangeNotifier{
+class TopRatedTvNotifier extends ChangeNotifier {
   final GetTopRatedTv getTopRatedTv;
   TopRatedTvNotifier(this.getTopRatedTv);
 
@@ -16,7 +16,7 @@ class TopRatedTvNotifier extends ChangeNotifier{
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchTopRatedTv() async{
+  Future<void> fetchTopRatedTv() async {
     _state = RequestState.Loading;
     notifyListeners();
 
@@ -27,7 +27,7 @@ class TopRatedTvNotifier extends ChangeNotifier{
         _state = RequestState.Error;
         notifyListeners();
       },
-      (tvData){
+      (tvData) {
         _tv = tvData;
         _state = RequestState.Loaded;
         notifyListeners();

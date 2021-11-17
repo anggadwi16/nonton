@@ -18,8 +18,12 @@ class _WatchlistPageState extends State<WatchlistPage> {
           title: Text('Watchlist'),
           bottom: TabBar(
             tabs: [
-              Tab(child: Text('Movie'),),
-              Tab(child: Text('TV Series'),),
+              Tab(
+                child: Text('Movie'),
+              ),
+              Tab(
+                child: Text('TV Series'),
+              ),
             ],
           ),
         ),
