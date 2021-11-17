@@ -18,6 +18,7 @@ class Season extends Equatable {
     required this.posterPath,
     required this.seasonNumber,
   });
+
   @override
   List<Object?> get props =>
       [airDate, episodeCount, id, name, overview, posterPath, seasonNumber];
