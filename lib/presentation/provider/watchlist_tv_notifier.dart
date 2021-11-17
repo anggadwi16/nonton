@@ -8,7 +8,7 @@ class WatchlistTvNotifier extends ChangeNotifier {
   var _watchlistTV = <Tv>[];
   List<Tv> get watchlistTv => _watchlistTV;
 
-  var _watchlistState = RequestState.Empty;
+  var _watchlistState = RequestState.empty;
   RequestState get watchlistState => _watchlistState;
 
   String _message = '';
@@ -17,18 +17,18 @@ class WatchlistTvNotifier extends ChangeNotifier {
   WatchlistTvNotifier(this.getWatchlistTv);
 
   Future<void> fetchWatchlistTv() async {
-    _watchlistState = RequestState.Loading;
+    _watchlistState = RequestState.loading;
     notifyListeners();
 
     final result = await getWatchlistTv.execute();
     result.fold(
       (failure) {
-        _watchlistState = RequestState.Error;
+        _watchlistState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (tvData) {
-        _watchlistState = RequestState.Loaded;
+        _watchlistState = RequestState.loaded;
         _watchlistTV = tvData;
         notifyListeners();
       },

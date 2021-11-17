@@ -30,7 +30,7 @@ void main(){
     when(mockGetWatchlistTv.execute())
         .thenAnswer((_) async => Right([testWatchlistTv]));
     await provider.fetchWatchlistTv();
-    expect(provider.watchlistState, RequestState.Loaded);
+    expect(provider.watchlistState, RequestState.loaded);
     expect(provider.watchlistTv, [testWatchlistTv]);
     expect(listenerCallCount, 2);
   });
@@ -39,7 +39,7 @@ void main(){
     when(mockGetWatchlistTv.execute())
         .thenAnswer((_) async => Left(DatabaseFailure('Cannot get data')));
     await provider.fetchWatchlistTv();
-    expect(provider.watchlistState, RequestState.Error);
+    expect(provider.watchlistState, RequestState.error);
     expect(provider.message, 'Cannot get data');
     expect(listenerCallCount, 2);
   });

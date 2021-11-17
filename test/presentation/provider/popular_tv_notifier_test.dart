@@ -43,7 +43,7 @@ void main(){
     when(mockGetPopularTv.execute())
         .thenAnswer((_) async => Right(tTvList));
     notifier.fetchPopularTv();
-    expect(notifier.state, RequestState.Loading);
+    expect(notifier.state, RequestState.loading);
     expect(listenerCallCount, 1);
   });
 
@@ -51,7 +51,7 @@ void main(){
     when(mockGetPopularTv.execute())
         .thenAnswer((_) async => Right(tTvList));
     await notifier.fetchPopularTv();
-    expect(notifier.state, RequestState.Loaded);
+    expect(notifier.state, RequestState.loaded);
     expect(notifier.tv, tTvList);
     expect(listenerCallCount, 2);
   });
@@ -60,7 +60,7 @@ void main(){
     when(mockGetPopularTv.execute())
         .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
     await notifier.fetchPopularTv();
-    expect(notifier.state, RequestState.Error);
+    expect(notifier.state, RequestState.error);
     expect(notifier.message, 'Server Failure');
     expect(listenerCallCount, 2);
   });

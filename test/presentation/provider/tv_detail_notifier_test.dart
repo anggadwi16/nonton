@@ -85,14 +85,14 @@ void main(){
     test('should change state to Loading when usecase is called', () {
       _arrangeUsecase();
       provider.fetchTvDetail(tId);
-      expect(provider.tvState, RequestState.Loading);
+      expect(provider.tvState, RequestState.loading);
       expect(listenerCallCount, 1);
     });
 
     test('should change tv when data is gotten successfully', () async{
       _arrangeUsecase();
       await provider.fetchTvDetail(tId);
-      expect(provider.tvState, RequestState.Loaded);
+      expect(provider.tvState, RequestState.loaded);
       expect(provider.tv, testTvDetail);
       expect(listenerCallCount, 3);
     });
@@ -100,7 +100,7 @@ void main(){
     test('should change recommendation tv when data is gotten successfully', () async{
       _arrangeUsecase();
       await provider.fetchTvDetail(tId);
-      expect(provider.tvState, RequestState.Loaded);
+      expect(provider.tvState, RequestState.loaded);
       expect(provider.tvRecommendations, tTvList);
     });
   });
@@ -116,7 +116,7 @@ void main(){
     test('should update recommendation state when data is gotten successfully', () async{
       _arrangeUsecase();
       await provider.fetchTvDetail(tId);
-      expect(provider.recommendationState, RequestState.Loaded);
+      expect(provider.recommendationState, RequestState.loaded);
       expect(provider.tvRecommendations, tTvList);
     });
 
@@ -127,7 +127,7 @@ void main(){
           .thenAnswer((_) async => Left(ServerFailure('Failed')));
       await provider.fetchTvDetail(tId);
 
-      expect(provider.recommendationState, RequestState.Error);
+      expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
     });
   });
@@ -188,7 +188,7 @@ void main(){
       when(mockGetTvRecommendations.execute(tId))
           .thenAnswer((_) async => Right(tTvList));
       await provider.fetchTvDetail(tId);
-      expect(provider.tvState, RequestState.Error);
+      expect(provider.tvState, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
 

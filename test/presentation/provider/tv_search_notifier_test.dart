@@ -46,14 +46,14 @@ void main(){
       when(mockSearchTv.execute(tQuery))
           .thenAnswer((_) async => Right(tTvList));
       provider.fetchTvSearch(tQuery);
-      expect(provider.state, RequestState.Loading);
+      expect(provider.state, RequestState.loading);
     });
 
     test('should change search result data when data is gotten successfully', () async {
       when(mockSearchTv.execute(tQuery))
           .thenAnswer((_) async => Right(tTvList));
       await provider.fetchTvSearch(tQuery);
-      expect(provider.state, RequestState.Loaded);
+      expect(provider.state, RequestState.loaded);
       expect(provider.searchResult, tTvList);
       expect(listenerCallCount, 2);
     });
@@ -62,7 +62,7 @@ void main(){
       when(mockSearchTv.execute(tQuery))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       await provider.fetchTvSearch(tQuery);
-      expect(provider.state, RequestState.Error);
+      expect(provider.state, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

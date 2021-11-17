@@ -27,11 +27,11 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> {
         padding: EdgeInsets.all(8),
         child: Consumer<WatchlistTvNotifier>(
           builder: (context, data, child) {
-            if (data.watchlistState == RequestState.Loading) {
+            if (data.watchlistState == RequestState.loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.watchlistState == RequestState.Loaded) {
+            } else if (data.watchlistState == RequestState.loaded) {
               return ListView.builder(
                 itemCount: data.watchlistTv.length,
                 itemBuilder: (context, index) {
