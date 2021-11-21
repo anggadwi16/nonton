@@ -91,7 +91,7 @@ void main() {
         when(mockGetTvDetail.execute(tId))
             .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         when(mockGetTvRecommendations.execute(tId))
-            .thenAnswer((_) async => Left(ServerFailure('ServerFailure')));
+            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         when(mockGetWatchlistTvStatus.execute(tId))
             .thenAnswer((_) async => true);
         return tvDetailBloc;
