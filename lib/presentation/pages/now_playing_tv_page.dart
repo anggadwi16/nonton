@@ -31,14 +31,12 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            }
-            else if (state is NowPlayingTvError){
+            } else if (state is NowPlayingTvError) {
               return Center(
                 key: Key('error_message'),
                 child: Text(state.message),
               );
-            }
-            else {
+            } else if (state is NowPlayingTvLoaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = context.read<NowPlayingTvBloc>().nowPlaying[index];
@@ -46,6 +44,8 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
                 },
                 itemCount: context.read<NowPlayingTvBloc>().nowPlaying.length,
               );
+            } else {
+              return Container();
             }
           },
         ),
