@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
+import 'package:ditonton/presentation/bloc/search_tv_bloc.dart';
+import 'package:ditonton/presentation/widgets/empty_data.dart';
 import 'package:ditonton/presentation/widgets/tv_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class TvSearchPage extends StatefulWidget {
@@ -13,6 +16,12 @@ class TvSearchPage extends StatefulWidget {
 }
 
 class _TvSearchPageState extends State<TvSearchPage> {
+  Timer? _debounce;
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +34,8 @@ class _TvSearchPageState extends State<TvSearchPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                Provider.of<TvSearchNotifier>(context, listen: false)
-                    .fetchTvSearch(query);
+              onChanged: (value) {
+                _onSearchChanged(value);
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -43,24 +51,26 @@ class _TvSearchPageState extends State<TvSearchPage> {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.loading) {
+            BlocBuilder<SearchTvBloc, SearchTvState>(
+              builder: (context, state) {
+                if (state is SearchTvLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.state == RequestState.loaded) {
-                  final result = data.searchResult;
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final tv = data.searchResult[index];
-                        return TvCard(tv);
-                      },
-                      itemCount: result.length,
-                    ),
-                  );
+                } else if (state is SearchTvLoaded) {
+                  final result = context.read<SearchTvBloc>().searchList;
+                  return result.isEmpty
+                      ? EmptyData('Data tidak ditemukan')
+                      : Expanded(
+                          child: ListView.builder(
+                            padding: EdgeInsets.all(8),
+                            itemBuilder: (context, index) {
+                              final tv = result[index];
+                              return TvCard(tv);
+                            },
+                            itemCount: result.length,
+                          ),
+                        );
                 } else {
                   return Expanded(
                     child: Container(),
@@ -72,5 +82,12 @@ class _TvSearchPageState extends State<TvSearchPage> {
         ),
       ),
     );
+  }
+
+  _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      context.read<SearchTvBloc>().add(OnChangeSearch(query));
+    });
   }
 }
