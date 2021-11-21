@@ -1,5 +1,6 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/presentation/bloc/now_playing_tv_bloc.dart';
+import 'package:ditonton/presentation/bloc/popular_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_detail_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (_) => di.locator<TvDetailBloc>()),
         BlocProvider(create: (_) => di.locator<NowPlayingTvBloc>()),
+        BlocProvider(create: (_) => di.locator<PopularTvBloc>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
