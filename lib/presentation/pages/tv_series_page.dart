@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/presentation/bloc/tv_list_bloc.dart';
 import 'package:ditonton/presentation/pages/now_playing_tv_page.dart';
 import 'package:ditonton/presentation/pages/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv_search_page.dart';
 import 'package:ditonton/presentation/pages/tv_series_detail_page.dart';
-import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class TVSeriesPage extends StatefulWidget {
@@ -21,10 +21,7 @@ class TVSeriesPage extends StatefulWidget {
 class _TVSeriesPageState extends State<TVSeriesPage> {
   @override
   void initState() {
-    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
-      ..fetchNowPlayingTv()
-      ..fetchPopularTv()
-      ..fetchTopRatedTv());
+    context.read<TvListBloc>().add(LoadTvList());
     super.initState();
   }
 
@@ -54,15 +51,14 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, NowPlayingTvPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(
-                builder: (context, data, child) {
-                  final state = data.nowPlayingState;
-                  if (state == RequestState.loading) {
+              BlocBuilder<TvListBloc, TvListState>(
+                builder: (context, state) {
+                  if (state is TvListLoading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state == RequestState.loaded) {
-                    return TvList(data.nowPlayingTv);
+                  } else if (state is TvListLoaded) {
+                    return TvList(context.read<TvListBloc>().nowPlayingTv);
                   } else {
                     return Text('Failed');
                   }
@@ -73,15 +69,14 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(
-                builder: (context, data, child) {
-                  final state = data.popularTvState;
-                  if (state == RequestState.loading) {
+              BlocBuilder<TvListBloc, TvListState>(
+                builder: (context, state) {
+                  if (state is TvListLoading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state == RequestState.loaded) {
-                    return TvList(data.popularTv);
+                  } else if (state is TvListLoaded) {
+                    return TvList(context.read<TvListBloc>().popularTv);
                   } else {
                     return Text('Failed');
                   }
@@ -92,15 +87,14 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(
-                builder: (context, data, child) {
-                  final state = data.topRatedTvState;
-                  if (state == RequestState.loading) {
+              BlocBuilder<TvListBloc, TvListState>(
+                builder: (context, state) {
+                  if (state is TvListLoading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state == RequestState.loaded) {
-                    return TvList(data.topRatedTv);
+                  } else if (state is TvListLoaded) {
+                    return TvList(context.read<TvListBloc>().topRatedTv);
                   } else {
                     return Text('Failed');
                   }
