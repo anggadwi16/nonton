@@ -8,6 +8,7 @@ class EmptyData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Icon(Icons.info, size: 30,),
           Text(message),
