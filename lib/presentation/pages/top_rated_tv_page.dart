@@ -1,7 +1,7 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/top_rated_tv_notifier.dart';
+import 'package:ditonton/presentation/bloc/top_rated_tv_bloc.dart';
 import 'package:ditonton/presentation/widgets/tv_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class TopRatedTvPage extends StatefulWidget {
@@ -13,9 +13,7 @@ class TopRatedTvPage extends StatefulWidget {
 class _TopRatedTvPageState extends State<TopRatedTvPage> {
   @override
   void initState() {
-    Future.microtask(() =>
-        Provider.of<TopRatedTvNotifier>(context, listen: false)
-            .fetchTopRatedTv());
+    context.read<TopRatedTvBloc>().add(LoadTopRatedTv());
     super.initState();
   }
 
@@ -27,25 +25,27 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
       ),
       body: Padding(
         padding: EdgeInsets.all(8),
-        child: Consumer<TopRatedTvNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.loading) {
+        child: BlocBuilder<TopRatedTvBloc, TopRatedTvState>(
+          builder: (context, state) {
+            if (state is TopRatedTvLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.loaded) {
+            } else if (state is TopRatedTvLoaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.tv[index];
+                  final tv = context.read<TopRatedTvBloc>().topRated[index];
                   return TvCard(tv);
                 },
-                itemCount: data.tv.length,
+                itemCount: context.read<TopRatedTvBloc>().topRated.length,
               );
-            } else {
+            } else if (state is TopRatedTvError){
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text(state.message),
               );
+            } else {
+              return Container();
             }
           },
         ),
