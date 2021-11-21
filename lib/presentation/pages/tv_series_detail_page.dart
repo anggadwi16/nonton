@@ -53,7 +53,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
         },
         child: BlocBuilder<TvDetailBloc, TvDetailState>(
           builder: (context, state) {
-            if (state is TvDetailLoading) {
+               if (state is TvDetailLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
