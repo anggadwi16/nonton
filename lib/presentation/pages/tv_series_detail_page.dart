@@ -53,13 +53,13 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
         },
         child: BlocBuilder<TvDetailBloc, TvDetailState>(
           builder: (context, state) {
-               if (state is TvDetailLoading) {
+            if (state is TvDetailLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
             } else if (state is TvDetailError) {
               return Center(child: Text(state.message));
-            } else {
+            } else if (state is TvDetailLoaded) {
               return SafeArea(
                 child: DetailContent(
                   context.read<TvDetailBloc>().tv,
@@ -67,6 +67,8 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
                   context.read<TvDetailBloc>().isAddedWatchlist,
                 ),
               );
+            } else {
+              return Container();
             }
           },
         ),
