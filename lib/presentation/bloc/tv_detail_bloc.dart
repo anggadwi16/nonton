@@ -35,7 +35,7 @@ class TvDetailBloc extends Bloc<TvDetailEvent, TvDetailState> {
   late TvDetail _tv;
   TvDetail get tv => _tv;
 
-  late List<Tv> _recommendation = [];
+  List<Tv> _recommendation = [];
   List<Tv> get recommendation => _recommendation;
 
   bool _isAddedWatchlist = false;
@@ -57,13 +57,16 @@ class TvDetailBloc extends Bloc<TvDetailEvent, TvDetailState> {
         },
         (tvDetail) async* {
           _tv = tvDetail;
-          yield* getRecommendation.fold((failure) async* {
-            yield TvDetailError(failure.message);
-          }, (recommendationData) async* {
-            _recommendation = recommendationData;
-            _isAddedWatchlist = getWatchlistStatus;
-            yield TvDetailLoaded();
-          });
+          yield* getRecommendation.fold(
+            (failure) async* {
+              yield TvDetailError(failure.message);
+            },
+            (recommendationData) async* {
+              _recommendation = recommendationData;
+              _isAddedWatchlist = getWatchlistStatus;
+              yield TvDetailLoaded();
+            },
+          );
         },
       );
     }
@@ -85,13 +88,16 @@ class TvDetailBloc extends Bloc<TvDetailEvent, TvDetailState> {
       yield TvDetailWatchlist();
       final tv = event.tv;
       final result = await _removeWatchlistTv.execute(tv);
-      yield* result.fold((failure) async* {
-        yield TvDetailWatchlistMessage(failure.message);
-      }, (successMessage) async* {
-        final getWatchlistStatus = await _getWatchlistTvStatus.execute(tv.id);
-        _isAddedWatchlist = getWatchlistStatus;
-        yield TvDetailWatchlistMessage(successMessage);
-      });
+      yield* result.fold(
+        (failure) async* {
+          yield TvDetailWatchlistMessage(failure.message);
+        },
+        (successMessage) async* {
+          final getWatchlistStatus = await _getWatchlistTvStatus.execute(tv.id);
+          _isAddedWatchlist = getWatchlistStatus;
+          yield TvDetailWatchlistMessage(successMessage);
+        },
+      );
     }
   }
 }

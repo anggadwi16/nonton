@@ -59,7 +59,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
               );
             } else if (state is TvDetailError) {
               return Center(child: Text(state.message));
-            } else if (state is TvDetailLoaded) {
+            } else if (state is TvDetailLoaded || state is TvDetailWatchlistMessage || state is TvDetailWatchlist) {
               return SafeArea(
                 child: DetailContent(
                   context.read<TvDetailBloc>().tv,
@@ -134,18 +134,15 @@ class DetailContent extends StatelessWidget {
                                       .add(DeleteWatchlistTv(tv));
                                 }
                               },
-                              child: BlocBuilder<TvDetailBloc, TvDetailState>(
-                                  builder: (context, state) {
-                                return Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    isAddedWatchlist
-                                        ? Icon(Icons.check)
-                                        : Icon(Icons.add),
-                                    Text('Watchlist'),
-                                  ],
-                                );
-                              }),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  isAddedWatchlist
+                                      ? Icon(Icons.check)
+                                      : Icon(Icons.add),
+                                  Text('Watchlist'),
+                                ],
+                              ),
                             ),
                             Text(_showGenres(tv.genres)),
                             Row(
