@@ -1,7 +1,9 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/bloc/watchlist_movie_bloc.dart';
+import 'package:ditonton/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton/presentation/widgets/empty_data.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
@@ -15,9 +17,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistMovieNotifier>(context, listen: false)
-            .fetchWatchlistMovies());
+    context.read<WatchlistMovieBloc>().add(LoadWatchlistMovie());
   }
 
   @override
@@ -25,25 +25,43 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistMovieNotifier>(
-          builder: (context, data, child) {
-            if (data.watchlistState == RequestState.loading) {
+        child: BlocBuilder<WatchlistMovieBloc, WatchlistMovieState>(
+          builder: (context, state) {
+            if (state is WatchlistMovieLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.watchlistState == RequestState.loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final movie = data.watchlistMovies[index];
-                  return MovieCard(movie);
-                },
-                itemCount: data.watchlistMovies.length,
-              );
-            } else {
+            } else if (state is WatchlistMovieLoaded) {
+              final data = context.read<WatchlistMovieBloc>().watchlistMovie;
+              return data.isEmpty
+                  ? EmptyData('Data tidak ditemukan')
+                  : ListView.builder(
+                      itemBuilder: (context, index) {
+                        final movie = data[index];
+                        return InkWell(
+                            onTap: () async {
+                              dynamic result = await Navigator.pushNamed(
+                                context,
+                                MovieDetailPage.ROUTE_NAME,
+                                arguments: movie.id,
+                              );
+                              if (result == null) {
+                                context
+                                    .read<WatchlistMovieBloc>()
+                                    .add(LoadWatchlistMovie());
+                              }
+                            },
+                            child: MovieCard(movie));
+                      },
+                      itemCount: data.length,
+                    );
+            } else if (state is WatchlistMovieError) {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text(state.message),
               );
+            } else {
+              return Container();
             }
           },
         ),
