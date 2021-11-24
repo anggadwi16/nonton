@@ -70,7 +70,8 @@ void init() {
   locator.registerFactory(() => TvListBloc(locator(), locator(), locator()));
   locator.registerFactory(() => PopularMovieBloc(locator()));
   locator.registerFactory(() => TopRatedMovieBloc(locator()));
-  locator.registerFactory(() => MovieDetailBloc(locator(), locator(), locator(), locator(), locator()));
+  locator.registerFactory(() =>
+      MovieDetailBloc(locator(), locator(), locator(), locator(), locator()));
   locator.registerFactory(() => MovieListBloc(locator(), locator(), locator()));
   locator.registerFactory(() => SearchMovieBloc(locator()));
   locator.registerFactory(() => WatchlistMovieBloc(locator()));

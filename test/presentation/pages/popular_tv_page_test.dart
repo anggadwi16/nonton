@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-
 class MockBloc extends Mock implements PopularTvBloc {}
 
 class PopularTvEventFake extends Fake implements PopularTvEvent {}
@@ -16,7 +15,7 @@ class PopularTvStateFake extends Fake implements PopularTvState {}
 void main() {
   late PopularTvBloc popularTvBloc;
 
-  setUp((){
+  setUp(() {
     popularTvBloc = MockBloc();
   });
 
@@ -25,7 +24,7 @@ void main() {
     registerFallbackValue(PopularTvStateFake());
   });
 
-  Widget _makeTestableWidget(Widget body){
+  Widget _makeTestableWidget(Widget body) {
     return BlocProvider<PopularTvBloc>.value(
       value: popularTvBloc,
       child: MaterialApp(
@@ -49,8 +48,10 @@ void main() {
 
   final tTvList = <Tv>[tTv];
 
-  testWidgets('Page should display center progress bar when loading', (WidgetTester tester) async{
-    when(() => popularTvBloc.stream).thenAnswer((_) => Stream.value(PopularTvLoading()));
+  testWidgets('Page should display center progress bar when loading',
+      (WidgetTester tester) async {
+    when(() => popularTvBloc.stream)
+        .thenAnswer((_) => Stream.value(PopularTvLoading()));
     when(() => popularTvBloc.state).thenReturn(PopularTvLoading());
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
@@ -61,10 +62,13 @@ void main() {
     expect(progressBarFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display ListView when data is loaded', (WidgetTester tester) async{
-    when(() => popularTvBloc.stream).thenAnswer((_) => Stream.value(PopularTvLoading()));
+  testWidgets('Page should display ListView when data is loaded',
+      (WidgetTester tester) async {
+    when(() => popularTvBloc.stream)
+        .thenAnswer((_) => Stream.value(PopularTvLoading()));
     when(() => popularTvBloc.state).thenReturn(PopularTvLoading());
-    when(() => popularTvBloc.stream).thenAnswer((_) => Stream.value(PopularTvLoaded()));
+    when(() => popularTvBloc.stream)
+        .thenAnswer((_) => Stream.value(PopularTvLoaded()));
     when(() => popularTvBloc.state).thenReturn(PopularTvLoaded());
     when(() => popularTvBloc.popular).thenAnswer((_) => tTvList);
     when(() => popularTvBloc.popular).thenReturn(tTvList);
@@ -74,8 +78,10 @@ void main() {
     expect(listViewFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display text with message when Error', (WidgetTester tester) async{
-    when(() => popularTvBloc.stream).thenAnswer((_) => Stream.value(PopularTvError('Error')));
+  testWidgets('Page should display text with message when Error',
+      (WidgetTester tester) async {
+    when(() => popularTvBloc.stream)
+        .thenAnswer((_) => Stream.value(PopularTvError('Error')));
     when(() => popularTvBloc.state).thenReturn(PopularTvError('Error'));
 
     final textFinder = find.byKey(Key('error_message'));

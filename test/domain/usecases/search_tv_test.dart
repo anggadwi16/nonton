@@ -6,11 +6,11 @@ import 'package:mockito/mockito.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
-void main(){
+void main() {
   late SearchTv usecase;
   late MockTvRepository mockTvRepository;
 
-  setUp((){
+  setUp(() {
     mockTvRepository = MockTvRepository();
     usecase = SearchTv(mockTvRepository);
   });
@@ -18,9 +18,8 @@ void main(){
   final tTv = <Tv>[];
   final tQuery = 'squid';
 
-  test('should get list of tv from the repository', () async{
-    when(mockTvRepository.searchTv(tQuery))
-        .thenAnswer((_) async => Right(tTv));
+  test('should get list of tv from the repository', () async {
+    when(mockTvRepository.searchTv(tQuery)).thenAnswer((_) async => Right(tTv));
     final result = await usecase.execute(tQuery);
     expect(result, Right(tTv));
   });

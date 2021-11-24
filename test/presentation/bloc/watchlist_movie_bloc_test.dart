@@ -11,7 +11,6 @@ import 'package:mockito/mockito.dart';
 import '../provider/watchlist_movie_notifier_test.mocks.dart';
 
 @GenerateMocks([GetWatchlistMovies])
-
 void main() {
   late MockGetWatchlistMovies mockGetWatchlistMovies;
   late WatchlistMovieBloc watchlistMovieBloc;
@@ -44,7 +43,7 @@ void main() {
       'Should emit [Loading, Loaded] when get watchlist movie successful',
       build: () {
         when(mockGetWatchlistMovies.execute())
-          .thenAnswer((_) async => Right(tMovieList));
+            .thenAnswer((_) async => Right(tMovieList));
         return watchlistMovieBloc;
       },
       act: (bloc) => bloc.add(LoadWatchlistMovie()),

@@ -40,13 +40,12 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
                 },
                 itemCount: context.read<PopularMovieBloc>().popular.length,
               );
-            } else if (state is PopularMovieError){
+            } else if (state is PopularMovieError) {
               return Center(
                 key: Key('error_message'),
                 child: Text(state.message),
               );
-            }
-            else {
+            } else {
               return Container();
             }
           },

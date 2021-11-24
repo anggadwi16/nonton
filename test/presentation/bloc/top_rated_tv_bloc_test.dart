@@ -11,7 +11,6 @@ import 'package:mockito/mockito.dart';
 import '../provider/top_rated_tv_notifier_test.mocks.dart';
 
 @GenerateMocks([GetTopRatedTv])
-
 void main() {
   late MockGetTopRatedTv mockGetTopRatedTv;
   late TopRatedTvBloc topRatedTvBloc;
@@ -41,7 +40,7 @@ void main() {
       'Should emit [Loading, Loaded] when get top rated tv successful',
       build: () {
         when(mockGetTopRatedTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+            .thenAnswer((_) async => Right(tTvList));
         return topRatedTvBloc;
       },
       act: (bloc) => bloc.add(LoadTopRatedTv()),

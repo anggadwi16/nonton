@@ -8,8 +8,11 @@ abstract class PopularMovieState extends Equatable {
 }
 
 class PopularMovieInitial extends PopularMovieState {}
+
 class PopularMovieLoading extends PopularMovieState {}
+
 class PopularMovieLoaded extends PopularMovieState {}
+
 class PopularMovieError extends PopularMovieState {
   final String message;
   PopularMovieError(this.message);

@@ -11,13 +11,12 @@ import 'package:mockito/mockito.dart';
 import 'tv_search_notifier_test.mocks.dart';
 
 @GenerateMocks([SearchTv])
-
-void main(){
+void main() {
   late TvSearchNotifier provider;
   late MockSearchTv mockSearchTv;
   late int listenerCallCount;
 
-  setUp((){
+  setUp(() {
     listenerCallCount = 0;
     mockSearchTv = MockSearchTv();
     provider = TvSearchNotifier(searchTv: mockSearchTv)
@@ -27,16 +26,16 @@ void main(){
   });
 
   final tTvModel = Tv(
-      backdropPath: "backdropPath",
-      genreIds: [1, 2, 3],
-      id: 1,
-      originalName: 'Squid Game',
-      overview: "overview",
-      popularity: 1.0,
-      posterPath: "posterPath",
-      name: 'Squid Game',
-      voteAverage: 1.0,
-      voteCount: 1,
+    backdropPath: "backdropPath",
+    genreIds: [1, 2, 3],
+    id: 1,
+    originalName: 'Squid Game',
+    overview: "overview",
+    popularity: 1.0,
+    posterPath: "posterPath",
+    name: 'Squid Game',
+    voteAverage: 1.0,
+    voteCount: 1,
   );
   final tTvList = <Tv>[tTvModel];
   final tQuery = 'squid';
@@ -49,7 +48,8 @@ void main(){
       expect(provider.state, RequestState.loading);
     });
 
-    test('should change search result data when data is gotten successfully', () async {
+    test('should change search result data when data is gotten successfully',
+        () async {
       when(mockSearchTv.execute(tQuery))
           .thenAnswer((_) async => Right(tTvList));
       await provider.fetchTvSearch(tQuery);

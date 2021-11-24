@@ -61,15 +61,15 @@ class _SearchPageState extends State<SearchPage> {
                   return result.isEmpty
                       ? EmptyData('Data tidak ditemukan')
                       : Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final movie = result[index];
-                        return MovieCard(movie);
-                      },
-                      itemCount: result.length,
-                    ),
-                  );
+                          child: ListView.builder(
+                            padding: const EdgeInsets.all(8),
+                            itemBuilder: (context, index) {
+                              final movie = result[index];
+                              return MovieCard(movie);
+                            },
+                            itemCount: result.length,
+                          ),
+                        );
                 } else {
                   return Expanded(
                     child: Container(),

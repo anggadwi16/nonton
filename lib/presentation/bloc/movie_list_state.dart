@@ -9,8 +9,11 @@ abstract class MovieListState extends Equatable {
 }
 
 class MovieListInitial extends MovieListState {}
+
 class MovieListLoading extends MovieListState {}
+
 class MovieListLoaded extends MovieListState {}
+
 class MovieListError extends MovieListState {
   final String message;
   MovieListError(this.message);

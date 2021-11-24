@@ -4,16 +4,16 @@ import 'package:mockito/mockito.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
-void main(){
+void main() {
   late GetWatchlistTvStatus usecase;
   late MockTvRepository mockTvRepository;
 
-  setUp((){
+  setUp(() {
     mockTvRepository = MockTvRepository();
     usecase = GetWatchlistTvStatus(mockTvRepository);
   });
 
-  test('should get watchlist status from repository', () async{
+  test('should get watchlist status from repository', () async {
     when(mockTvRepository.isAddedToWatchlistTv(1))
         .thenAnswer((_) async => true);
     final result = await usecase.execute(1);

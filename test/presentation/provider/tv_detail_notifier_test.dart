@@ -22,8 +22,7 @@ import 'tv_detail_notifier_test.mocks.dart';
   SaveWatchlistTv,
   RemoveWatchlistTv,
 ])
-
-void main(){
+void main() {
   late TvDetailNotifier provider;
   late MockGetTvDetail mockGetTvDetail;
   late MockGetTvRecommendations mockGetTvRecommendations;
@@ -32,7 +31,7 @@ void main(){
   late MockRemoveWatchlistTv mockRemoveWatchlistTv;
   late int listenerCallCount;
 
-  setUp((){
+  setUp(() {
     listenerCallCount = 0;
     mockGetTvDetail = MockGetTvDetail();
     mockGetTvRecommendations = MockGetTvRecommendations();
@@ -46,32 +45,32 @@ void main(){
       saveWatchlistTv: mockSaveWatchlistTv,
       removeWatchlistTv: mockRemoveWatchlistTv,
     )..addListener(() {
-      listenerCallCount += 1;
-    });
+        listenerCallCount += 1;
+      });
   });
 
   final tId = 1;
 
   final tTv = Tv(
-      backdropPath: "backdropPath",
-      genreIds: [1,2,3],
-      id: 1,
-      originalName: "originalName",
-      overview: "overview",
-      popularity: 1.0,
-      posterPath: "posterPath",
-      name: "name",
-      voteAverage: 1.0,
-      voteCount: 1,
+    backdropPath: "backdropPath",
+    genreIds: [1, 2, 3],
+    id: 1,
+    originalName: "originalName",
+    overview: "overview",
+    popularity: 1.0,
+    posterPath: "posterPath",
+    name: "name",
+    voteAverage: 1.0,
+    voteCount: 1,
   );
 
   final tTvList = <Tv>[tTv];
 
-  void _arrangeUsecase(){
+  void _arrangeUsecase() {
     when(mockGetTvDetail.execute(tId))
         .thenAnswer((_) async => Right(testTvDetail));
     when(mockGetTvRecommendations.execute(tId))
-      .thenAnswer((_) async => Right(tTvList));
+        .thenAnswer((_) async => Right(tTvList));
   }
 
   group('Get tv detail', () {
@@ -89,7 +88,7 @@ void main(){
       expect(listenerCallCount, 1);
     });
 
-    test('should change tv when data is gotten successfully', () async{
+    test('should change tv when data is gotten successfully', () async {
       _arrangeUsecase();
       await provider.fetchTvDetail(tId);
       expect(provider.tvState, RequestState.loaded);
@@ -97,7 +96,8 @@ void main(){
       expect(listenerCallCount, 3);
     });
 
-    test('should change recommendation tv when data is gotten successfully', () async{
+    test('should change recommendation tv when data is gotten successfully',
+        () async {
       _arrangeUsecase();
       await provider.fetchTvDetail(tId);
       expect(provider.tvState, RequestState.loaded);
@@ -105,7 +105,7 @@ void main(){
     });
   });
 
-  group('Get tv recommendation', (){
+  group('Get tv recommendation', () {
     test('should get data from the usecase', () async {
       _arrangeUsecase();
       await provider.fetchTvDetail(tId);
@@ -113,7 +113,8 @@ void main(){
       expect(provider.tvRecommendations, tTvList);
     });
 
-    test('should update recommendation state when data is gotten successfully', () async{
+    test('should update recommendation state when data is gotten successfully',
+        () async {
       _arrangeUsecase();
       await provider.fetchTvDetail(tId);
       expect(provider.recommendationState, RequestState.loaded);
@@ -132,8 +133,8 @@ void main(){
     });
   });
 
-  group('Watchlist', (){
-    test('should get the watchlist status', () async{
+  group('Watchlist', () {
+    test('should get the watchlist status', () async {
       when(mockGetWatchlistTvStatus.execute(1)).thenAnswer((_) async => true);
       await provider.loadWatchlistStatus(1);
       expect(provider.isAddedtoWatchlist, true);
@@ -170,7 +171,7 @@ void main(){
       expect(listenerCallCount, 1);
     });
 
-    test('should update watchlist message when add watchlist failed', () async{
+    test('should update watchlist message when add watchlist failed', () async {
       when(mockSaveWatchlistTv.execute(testTvDetail))
           .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
       when(mockGetWatchlistTvStatus.execute(testTvDetail.id))
@@ -191,8 +192,6 @@ void main(){
       expect(provider.tvState, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
-
-
     });
   });
 }

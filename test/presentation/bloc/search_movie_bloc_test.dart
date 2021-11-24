@@ -11,7 +11,6 @@ import 'package:mockito/mockito.dart';
 import '../provider/movie_search_notifier_test.mocks.dart';
 
 @GenerateMocks([SearchMovies])
-
 void main() {
   late MockSearchMovies mockSearchMovies;
   late SearchMovieBloc searchMovieBloc;
@@ -28,7 +27,7 @@ void main() {
     id: 557,
     originalTitle: 'Spider-Man',
     overview:
-    'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
     popularity: 60.441,
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     releaseDate: '2002-05-01',
@@ -45,7 +44,7 @@ void main() {
       'Should emit [Loading, Loaded] when search movie successful',
       build: () {
         when(mockSearchMovies.execute(tQuery))
-          .thenAnswer((_) async => Right(tMovieList));
+            .thenAnswer((_) async => Right(tMovieList));
         return searchMovieBloc;
       },
       act: (bloc) => bloc.add(OnChangeSearchMovie(tQuery)),

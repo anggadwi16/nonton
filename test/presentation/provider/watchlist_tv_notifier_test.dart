@@ -11,8 +11,7 @@ import '../../dummy_data/dummy_objects.dart';
 import 'watchlist_tv_notifier_test.mocks.dart';
 
 @GenerateMocks([GetWatchlistTv])
-
-void main(){
+void main() {
   late WatchlistTvNotifier provider;
   late MockGetWatchlistTv mockGetWatchlistTv;
   late int listenerCallCount;

@@ -53,7 +53,8 @@ void main() {
 
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
-    when(() => topRatedMovieBloc.stream).thenAnswer((_) => Stream.value(TopRatedMovieLoading()));
+    when(() => topRatedMovieBloc.stream)
+        .thenAnswer((_) => Stream.value(TopRatedMovieLoading()));
     when(() => topRatedMovieBloc.state).thenReturn(TopRatedMovieLoading());
 
     final progressFinder = find.byType(CircularProgressIndicator);
@@ -67,7 +68,8 @@ void main() {
 
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
-    when(() => topRatedMovieBloc.stream).thenAnswer((_) => Stream.value(TopRatedMovieLoaded()));
+    when(() => topRatedMovieBloc.stream)
+        .thenAnswer((_) => Stream.value(TopRatedMovieLoaded()));
     when(() => topRatedMovieBloc.state).thenReturn(TopRatedMovieLoaded());
     when(() => topRatedMovieBloc.topRated).thenAnswer((_) => tMovieList);
     when(() => topRatedMovieBloc.topRated).thenReturn(tMovieList);
@@ -81,7 +83,8 @@ void main() {
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    when(() => topRatedMovieBloc.stream).thenAnswer((_) => Stream.value(TopRatedMovieError('Error')));
+    when(() => topRatedMovieBloc.stream)
+        .thenAnswer((_) => Stream.value(TopRatedMovieError('Error')));
     when(() => topRatedMovieBloc.state).thenReturn(TopRatedMovieError('Error'));
 
     final textFinder = find.byKey(Key('error_message'));

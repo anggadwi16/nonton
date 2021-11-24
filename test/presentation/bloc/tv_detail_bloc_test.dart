@@ -108,7 +108,6 @@ void main() {
         verify(mockGetWatchlistTvStatus.execute(tId));
       },
     );
-
   });
 
   group('Watchlist', () {
@@ -156,7 +155,7 @@ void main() {
       'Should Add Watchlist is unsuccess',
       build: () {
         when(mockSaveWatchlistTv.execute(testTvDetail))
-          .thenAnswer((_) async => Left(DatabaseFailure('Failure')));
+            .thenAnswer((_) async => Left(DatabaseFailure('Failure')));
         return tvDetailBloc;
       },
       act: (bloc) => bloc.add(AddWatchlistTv(testTvDetail)),

@@ -58,7 +58,8 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state is MovieListLoaded) {
-                  return MovieList(context.read<MovieListBloc>().nowPlayingMovie);
+                  return MovieList(
+                      context.read<MovieListBloc>().nowPlayingMovie);
                 } else {
                   return Text('Failed');
                 }

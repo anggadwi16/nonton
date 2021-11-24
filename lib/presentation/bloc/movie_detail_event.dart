@@ -31,4 +31,3 @@ class DeleteWatchlistMovie extends MovieDetailEvent {
   @override
   List<Object> get props => [movie];
 }
-

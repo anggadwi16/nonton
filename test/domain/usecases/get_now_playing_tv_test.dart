@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
-void main(){
+void main() {
   late GetNowPlayingTv usecase;
   late MockTvRepository mockTvRepository;
 
@@ -17,7 +17,7 @@ void main(){
 
   final tTv = <Tv>[];
 
-  test('should get list of tv from the repository', () async{
+  test('should get list of tv from the repository', () async {
     when(mockTvRepository.getNowPlayingTv())
         .thenAnswer((_) async => Right(tTv));
     final result = await usecase.execute();

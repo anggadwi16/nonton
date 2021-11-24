@@ -10,9 +10,7 @@ import 'package:mockito/mockito.dart';
 
 import 'popular_movie_bloc_test.mocks.dart';
 
-
 @GenerateMocks([GetPopularMovies])
-
 void main() {
   late MockGetPopularMovies mockGetPopularMovies;
   late PopularMovieBloc popularMovieBloc;
@@ -42,7 +40,7 @@ void main() {
 
   group(
     'Popular Movie',
-        () {
+    () {
       blocTest<PopularMovieBloc, PopularMovieState>(
         'Should emit [Loading, Loaded] when get popular movie successful',
         build: () {

@@ -40,7 +40,7 @@ void main() {
       'Should emit [Loading, Loaded] when get watchlist tv successful',
       build: () {
         when(mockGetWatchlistTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+            .thenAnswer((_) async => Right(tTvList));
         return watchlistTvBloc;
       },
       act: (bloc) => bloc.add(LoadWatchlistTv()),

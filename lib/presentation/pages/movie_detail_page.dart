@@ -58,7 +58,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is MovieDetailLoaded || state is MovieDetailWatchlistMessage || state is MovieDetailWatchlist) {
+            } else if (state is MovieDetailLoaded ||
+                state is MovieDetailWatchlistMessage ||
+                state is MovieDetailWatchlist) {
               final movie = context.read<MovieDetailBloc>().movie;
               final recommendation =
                   context.read<MovieDetailBloc>().recommendation;
@@ -133,9 +135,13 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  context.read<MovieDetailBloc>().add(AddWatchlistMovie(movie));
+                                  context
+                                      .read<MovieDetailBloc>()
+                                      .add(AddWatchlistMovie(movie));
                                 } else {
-                                  context.read<MovieDetailBloc>().add(DeleteWatchlistMovie(movie));
+                                  context
+                                      .read<MovieDetailBloc>()
+                                      .add(DeleteWatchlistMovie(movie));
                                 }
                               },
                               child: Row(
@@ -204,14 +210,11 @@ class DetailContent extends StatelessWidget {
                                         ),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                          'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                                          placeholder: (context, url) =>
-                                              Center(
-                                                child:
-                                                CircularProgressIndicator(),
-                                              ),
-                                          errorWidget:
-                                              (context, url, error) =>
+                                              'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                          placeholder: (context, url) => Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                          errorWidget: (context, url, error) =>
                                               Icon(Icons.error),
                                         ),
                                       ),

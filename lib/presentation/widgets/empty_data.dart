@@ -10,7 +10,10 @@ class EmptyData extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.info, size: 30,),
+          Icon(
+            Icons.info,
+            size: 30,
+          ),
           Text(message),
         ],
       ),

@@ -22,6 +22,7 @@ class _TvSearchPageState extends State<TvSearchPage> {
     _debounce?.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

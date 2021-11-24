@@ -54,7 +54,8 @@ void main() {
 
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
-    when(() => popularMovieBloc.stream).thenAnswer((_) => Stream.value(PopularMovieLoading()));
+    when(() => popularMovieBloc.stream)
+        .thenAnswer((_) => Stream.value(PopularMovieLoading()));
     when(() => popularMovieBloc.state).thenReturn(PopularMovieLoading());
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
@@ -68,9 +69,11 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
-    when(() => popularMovieBloc.stream).thenAnswer((_) => Stream.value(PopularMovieLoading()));
+    when(() => popularMovieBloc.stream)
+        .thenAnswer((_) => Stream.value(PopularMovieLoading()));
     when(() => popularMovieBloc.state).thenReturn(PopularMovieLoading());
-    when(() => popularMovieBloc.stream).thenAnswer((_) => Stream.value(PopularMovieLoaded()));
+    when(() => popularMovieBloc.stream)
+        .thenAnswer((_) => Stream.value(PopularMovieLoaded()));
     when(() => popularMovieBloc.state).thenReturn(PopularMovieLoaded());
     when(() => popularMovieBloc.popular).thenAnswer((_) => tMovieList);
     when(() => popularMovieBloc.popular).thenReturn(tMovieList);
@@ -84,7 +87,8 @@ void main() {
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    when(() => popularMovieBloc.stream).thenAnswer((_) => Stream.value(PopularMovieError('Error')));
+    when(() => popularMovieBloc.stream)
+        .thenAnswer((_) => Stream.value(PopularMovieError('Error')));
     when(() => popularMovieBloc.state).thenReturn(PopularMovieError('Error'));
 
     final textFinder = find.byKey(Key('error_message'));

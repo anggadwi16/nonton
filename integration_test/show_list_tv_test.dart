@@ -5,7 +5,7 @@ import 'package:integration_test/integration_test.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  
+
   testWidgets('show page tv series', (WidgetTester tester) async {
     app.main();
     await tester.pumpAndSettle();

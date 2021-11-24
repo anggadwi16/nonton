@@ -6,43 +6,39 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../json_reader.dart';
 
-main(){
+main() {
   final tTvModel = TvModel(
-      backdropPath: "/path.jpg",
-      genreIds: [1,2,3,4],
-      id: 1,
-      originalName: "original_name",
-      overview: "Overview",
-      popularity: 1.0,
-      posterPath: "/path.jpg",
-      name: "Name",
-      voteAverage: 3.2,
-      voteCount: 3,
+    backdropPath: "/path.jpg",
+    genreIds: [1, 2, 3, 4],
+    id: 1,
+    originalName: "original_name",
+    overview: "Overview",
+    popularity: 1.0,
+    posterPath: "/path.jpg",
+    name: "Name",
+    voteAverage: 3.2,
+    voteCount: 3,
   );
 
   final tTvResponseModel = TvResponse(tvList: <TvModel>[tTvModel]);
 
-  group('fromJson', (){
-    test('should return a valid model from JSON', () async{
-      final Map<String, dynamic> jsonMap = json.decode(readJson('dummy_data/tv_airing_today.json'));
+  group('fromJson', () {
+    test('should return a valid model from JSON', () async {
+      final Map<String, dynamic> jsonMap =
+          json.decode(readJson('dummy_data/tv_airing_today.json'));
       final result = TvResponse.fromJson(jsonMap);
       expect(result, tTvResponseModel);
     });
   });
 
-  group('toJson', (){
-    test('should return a JSON map containing proper data', () async{
+  group('toJson', () {
+    test('should return a JSON map containing proper data', () async {
       final result = tTvResponseModel.toJson();
       final expectedJsonMap = {
         "results": [
           {
             "backdrop_path": "/path.jpg",
-            "genre_ids": [
-              1,
-              2,
-              3,
-              4
-            ],
+            "genre_ids": [1, 2, 3, 4],
             "id": 1,
             "name": "Name",
             "original_name": "original_name",

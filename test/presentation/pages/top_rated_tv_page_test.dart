@@ -12,14 +12,14 @@ class TopRatedTvEventFake extends Fake implements TopRatedTvEvent {}
 
 class TopRatedTvStateFake extends Fake implements TopRatedTvState {}
 
-void main(){
+void main() {
   late TopRatedTvBloc topRatedTvBloc;
 
-  setUp((){
+  setUp(() {
     topRatedTvBloc = MockBloc();
   });
 
-  Widget _makeTestableWidget(Widget body){
+  Widget _makeTestableWidget(Widget body) {
     return BlocProvider<TopRatedTvBloc>.value(
       value: topRatedTvBloc,
       child: MaterialApp(
@@ -43,8 +43,10 @@ void main(){
 
   final tTvList = <Tv>[tTv];
 
-  testWidgets('Page should display progress bar when loading', (WidgetTester tester) async{
-    when(() => topRatedTvBloc.stream).thenAnswer((_) => Stream.value(TopRatedTvLoading()));
+  testWidgets('Page should display progress bar when loading',
+      (WidgetTester tester) async {
+    when(() => topRatedTvBloc.stream)
+        .thenAnswer((_) => Stream.value(TopRatedTvLoading()));
     when(() => topRatedTvBloc.state).thenReturn(TopRatedTvLoading());
 
     final progressFinder = find.byType(CircularProgressIndicator);
@@ -55,10 +57,13 @@ void main(){
     expect(progressFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display when data is loaded', (WidgetTester tester) async{
-    when(() => topRatedTvBloc.stream).thenAnswer((_) => Stream.value(TopRatedTvLoading()));
+  testWidgets('Page should display when data is loaded',
+      (WidgetTester tester) async {
+    when(() => topRatedTvBloc.stream)
+        .thenAnswer((_) => Stream.value(TopRatedTvLoading()));
     when(() => topRatedTvBloc.state).thenReturn(TopRatedTvLoading());
-    when(() => topRatedTvBloc.stream).thenAnswer((_) => Stream.value(TopRatedTvLoaded()));
+    when(() => topRatedTvBloc.stream)
+        .thenAnswer((_) => Stream.value(TopRatedTvLoaded()));
     when(() => topRatedTvBloc.state).thenReturn(TopRatedTvLoaded());
     when(() => topRatedTvBloc.topRated).thenAnswer((_) => tTvList);
     when(() => topRatedTvBloc.topRated).thenReturn(tTvList);
@@ -69,8 +74,10 @@ void main(){
     expect(listViewFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display text with message when Error', (WidgetTester tester) async{
-    when(() => topRatedTvBloc.stream).thenAnswer((_) => Stream.value(TopRatedTvError('Error')));
+  testWidgets('Page should display text with message when Error',
+      (WidgetTester tester) async {
+    when(() => topRatedTvBloc.stream)
+        .thenAnswer((_) => Stream.value(TopRatedTvError('Error')));
     when(() => topRatedTvBloc.state).thenReturn(TopRatedTvError('Error'));
 
     final textFinder = find.byKey(Key('error_message'));

@@ -9,8 +9,11 @@ abstract class SearchMovieState extends Equatable {
 }
 
 class SearchMovieInitial extends SearchMovieState {}
+
 class SearchMovieLoading extends SearchMovieState {}
+
 class SearchMovieLoaded extends SearchMovieState {}
+
 class SearchMovieError extends SearchMovieState {
   final String message;
   SearchMovieError(this.message);

@@ -11,18 +11,18 @@ import 'package:mockito/mockito.dart';
 import 'popular_tv_notifier_test.mocks.dart';
 
 @GenerateMocks([GetPopularTv])
-void main(){
+void main() {
   late MockGetPopularTv mockGetPopularTv;
   late PopularTvNotifier notifier;
   late int listenerCallCount;
 
-  setUp((){
+  setUp(() {
     listenerCallCount = 0;
     mockGetPopularTv = MockGetPopularTv();
     notifier = PopularTvNotifier(mockGetPopularTv)
       ..addListener(() {
         listenerCallCount++;
-    });
+      });
   });
 
   final tTv = Tv(
@@ -39,17 +39,15 @@ void main(){
   );
   final tTvList = <Tv>[tTv];
 
-  test('should change state to loading when usecase is called', () async{
-    when(mockGetPopularTv.execute())
-        .thenAnswer((_) async => Right(tTvList));
+  test('should change state to loading when usecase is called', () async {
+    when(mockGetPopularTv.execute()).thenAnswer((_) async => Right(tTvList));
     notifier.fetchPopularTv();
     expect(notifier.state, RequestState.loading);
     expect(listenerCallCount, 1);
   });
 
   test('should change tv data when data is gotten successfully', () async {
-    when(mockGetPopularTv.execute())
-        .thenAnswer((_) async => Right(tTvList));
+    when(mockGetPopularTv.execute()).thenAnswer((_) async => Right(tTvList));
     await notifier.fetchPopularTv();
     expect(notifier.state, RequestState.loaded);
     expect(notifier.tv, tTvList);

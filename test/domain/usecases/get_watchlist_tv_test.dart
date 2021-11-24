@@ -6,16 +6,16 @@ import 'package:mockito/mockito.dart';
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
-void main(){
+void main() {
   late GetWatchlistTv usecase;
   late MockTvRepository mockTvRepository;
 
-  setUp((){
+  setUp(() {
     mockTvRepository = MockTvRepository();
     usecase = GetWatchlistTv(mockTvRepository);
   });
 
-  test('should get list of tv from the repository', () async{
+  test('should get list of tv from the repository', () async {
     when(mockTvRepository.getWatchlistTv())
         .thenAnswer((_) async => Right(testTvList));
     final result = await usecase.execute();

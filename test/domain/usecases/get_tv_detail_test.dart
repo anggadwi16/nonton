@@ -6,18 +6,18 @@ import 'package:mockito/mockito.dart';
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
-void main(){
+void main() {
   late GetTvDetail usecase;
   late MockTvRepository mockTvRepository;
 
-  setUp((){
+  setUp(() {
     mockTvRepository = MockTvRepository();
     usecase = GetTvDetail(mockTvRepository);
   });
 
   final tId = 1;
 
-  test('should get tv detail from the repository', () async{
+  test('should get tv detail from the repository', () async {
     when(mockTvRepository.getDetailTv(tId))
         .thenAnswer((_) async => Right(testTvDetail));
     final result = await usecase.execute(tId);

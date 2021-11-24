@@ -11,7 +11,6 @@ import 'package:mockito/mockito.dart';
 import 'tv_list_notifier_test.mocks.dart';
 
 @GenerateMocks([GetTopRatedTv])
-
 void main() {
   late MockGetTopRatedTv mockGetTopRatedTv;
   late TopRatedTvNotifier notifier;
@@ -27,31 +26,29 @@ void main() {
   });
 
   final tTv = Tv(
-      backdropPath: "backdropPath",
-      genreIds: [1,2,3],
-      id: 1,
-      originalName: "originalName",
-      overview: "overview",
-      popularity: 1.0,
-      posterPath: "posterPath",
-      name: "name",
-      voteAverage: 1.0,
-      voteCount: 1,
+    backdropPath: "backdropPath",
+    genreIds: [1, 2, 3],
+    id: 1,
+    originalName: "originalName",
+    overview: "overview",
+    popularity: 1.0,
+    posterPath: "posterPath",
+    name: "name",
+    voteAverage: 1.0,
+    voteCount: 1,
   );
 
   final tTvList = <Tv>[tTv];
 
   test('should change state to loading when usecase is called', () {
-    when(mockGetTopRatedTv.execute())
-        .thenAnswer((_) async => Right(tTvList));
+    when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
     notifier.fetchTopRatedTv();
     expect(notifier.state, RequestState.loading);
     expect(listenerCallCount, 1);
   });
 
   test('should change tv data when data is gotten successfully', () async {
-    when(mockGetTopRatedTv.execute())
-        .thenAnswer((_) async => Right(tTvList));
+    when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
     await notifier.fetchTopRatedTv();
     expect(notifier.state, RequestState.loaded);
     expect(notifier.tv, tTvList);

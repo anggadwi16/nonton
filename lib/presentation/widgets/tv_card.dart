@@ -16,8 +16,7 @@ class TvCard extends StatelessWidget {
         children: [
           Card(
             child: Container(
-              margin:
-                  EdgeInsets.only(left: 16 + 80 + 16, bottom: 8, right: 8),
+              margin: EdgeInsets.only(left: 16 + 80 + 16, bottom: 8, right: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

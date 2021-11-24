@@ -59,7 +59,9 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
               );
             } else if (state is TvDetailError) {
               return Center(child: Text(state.message));
-            } else if (state is TvDetailLoaded || state is TvDetailWatchlistMessage || state is TvDetailWatchlist) {
+            } else if (state is TvDetailLoaded ||
+                state is TvDetailWatchlistMessage ||
+                state is TvDetailWatchlist) {
               return SafeArea(
                 child: DetailContent(
                   context.read<TvDetailBloc>().tv,

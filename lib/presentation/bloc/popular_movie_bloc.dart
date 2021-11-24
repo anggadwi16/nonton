@@ -20,15 +20,18 @@ class PopularMovieBloc extends Bloc<PopularMovieEvent, PopularMovieState> {
   Stream<PopularMovieState> mapEventToState(
     PopularMovieEvent event,
   ) async* {
-    if(event is LoadPopularMovie) {
+    if (event is LoadPopularMovie) {
       yield PopularMovieLoading();
       final getNowPlayingMovie = await _getPopularMovies.execute();
-      yield* getNowPlayingMovie.fold((failure) async* {
-        yield PopularMovieError(failure.message);
-      }, (data) async* {
-        _popular = data;
-        yield PopularMovieLoaded();
-      },);
+      yield* getNowPlayingMovie.fold(
+        (failure) async* {
+          yield PopularMovieError(failure.message);
+        },
+        (data) async* {
+          _popular = data;
+          yield PopularMovieLoaded();
+        },
+      );
     }
   }
 }

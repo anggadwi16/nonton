@@ -9,8 +9,11 @@ abstract class TopRatedMovieState extends Equatable {
 }
 
 class TopRatedMovieInitial extends TopRatedMovieState {}
+
 class TopRatedMovieLoading extends TopRatedMovieState {}
+
 class TopRatedMovieLoaded extends TopRatedMovieState {}
+
 class TopRatedMovieError extends TopRatedMovieState {
   final String message;
   TopRatedMovieError(this.message);

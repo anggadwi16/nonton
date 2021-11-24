@@ -95,6 +95,5 @@ void main() {
         verify(mockGetNowPlayingTv.execute());
       },
     );
-
   });
 }

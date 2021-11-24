@@ -6,22 +6,24 @@ import 'package:mockito/mockito.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
-void main(){
+void main() {
   late GetPopularTv usecase;
   late MockTvRepository mockTvRepository;
 
-  setUp((){
+  setUp(() {
     mockTvRepository = MockTvRepository();
     usecase = GetPopularTv(mockTvRepository);
   });
 
   final tTv = <Tv>[];
 
-  group('GetPopularTv test', (){
-    group('execute', (){
-      test('should get list of tv ffrom repository when execute function is called', () async{
+  group('GetPopularTv test', () {
+    group('execute', () {
+      test(
+          'should get list of tv ffrom repository when execute function is called',
+          () async {
         when(mockTvRepository.getPopularTv())
-          .thenAnswer((_) async => Right(tTv));
+            .thenAnswer((_) async => Right(tTv));
         final result = await usecase.execute();
         expect(result, Right(tTv));
       });

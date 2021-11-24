@@ -66,27 +66,26 @@ void main() {
 
   group('Get detail movie', () {
     blocTest<MovieDetailBloc, MovieDetailState>(
-      'Should emit [Loading, Loaded] when get detail movie successful',
-      build: () {
-        when(mockGetWatchListStatus.execute(tId))
-          .thenAnswer((_) async => true);
-        when(mockGetMovieRecommendations.execute(tId))
-          .thenAnswer((_) async => Right(tMovies));
-        when(mockGetMovieDetail.execute(tId))
-          .thenAnswer((_) async => Right(testMovieDetail));
-        return movieDetailBloc;
-      },
-      act: (bloc) => bloc.add(LoadDetailMovie(tId)),
-      expect: () => <MovieDetailState>[
-       MovieDetailLoading(),
-       MovieDetailLoaded(),
-      ],
-      verify: (bloc) {
-        verify(mockGetMovieDetail.execute(tId));
-        verify(mockGetMovieRecommendations.execute(tId));
-        verify(mockGetWatchListStatus.execute(tId));
-      }
-    );
+        'Should emit [Loading, Loaded] when get detail movie successful',
+        build: () {
+          when(mockGetWatchListStatus.execute(tId))
+              .thenAnswer((_) async => true);
+          when(mockGetMovieRecommendations.execute(tId))
+              .thenAnswer((_) async => Right(tMovies));
+          when(mockGetMovieDetail.execute(tId))
+              .thenAnswer((_) async => Right(testMovieDetail));
+          return movieDetailBloc;
+        },
+        act: (bloc) => bloc.add(LoadDetailMovie(tId)),
+        expect: () => <MovieDetailState>[
+              MovieDetailLoading(),
+              MovieDetailLoaded(),
+            ],
+        verify: (bloc) {
+          verify(mockGetMovieDetail.execute(tId));
+          verify(mockGetMovieRecommendations.execute(tId));
+          verify(mockGetWatchListStatus.execute(tId));
+        });
 
     blocTest<MovieDetailBloc, MovieDetailState>(
         'Should emit [Loading, Error] when get detail movie unsuccessful',
@@ -101,15 +100,14 @@ void main() {
         },
         act: (bloc) => bloc.add(LoadDetailMovie(tId)),
         expect: () => <MovieDetailState>[
-          MovieDetailLoading(),
-          MovieDetailError('Server Failure'),
-        ],
+              MovieDetailLoading(),
+              MovieDetailError('Server Failure'),
+            ],
         verify: (bloc) {
           verify(mockGetMovieDetail.execute(tId));
           verify(mockGetMovieRecommendations.execute(tId));
           verify(mockGetWatchListStatus.execute(tId));
-        }
-    );
+        });
   });
 
   group('Watchlist Movie', () {
@@ -117,9 +115,8 @@ void main() {
       'Should Add Watchlist is success',
       build: () {
         when(mockSaveWatchlist.execute(testMovieDetail))
-          .thenAnswer((_) async => Right('Success'));
-        when(mockGetWatchListStatus.execute(tId))
-          .thenAnswer((_) async => true);
+            .thenAnswer((_) async => Right('Success'));
+        when(mockGetWatchListStatus.execute(tId)).thenAnswer((_) async => true);
         return movieDetailBloc;
       },
       act: (bloc) => bloc.add(AddWatchlistMovie(testMovieDetail)),
@@ -155,8 +152,7 @@ void main() {
       build: () {
         when(mockRemoveWatchlist.execute(testMovieDetail))
             .thenAnswer((_) async => Right('Success'));
-        when(mockGetWatchListStatus.execute(tId))
-            .thenAnswer((_) async => true);
+        when(mockGetWatchListStatus.execute(tId)).thenAnswer((_) async => true);
         return movieDetailBloc;
       },
       act: (bloc) => bloc.add(DeleteWatchlistMovie(testMovieDetail)),

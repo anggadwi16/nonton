@@ -39,7 +39,7 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
                 },
                 itemCount: context.read<TopRatedTvBloc>().topRated.length,
               );
-            } else if (state is TopRatedTvError){
+            } else if (state is TopRatedTvError) {
               return Center(
                 key: Key('error_message'),
                 child: Text(state.message),

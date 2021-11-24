@@ -12,12 +12,7 @@ import 'package:mockito/mockito.dart';
 
 import 'tv_list_notifier_test.mocks.dart';
 
-@GenerateMocks([
-  GetNowPlayingTv,
-  GetPopularTv,
-  GetTopRatedTv
-])
-
+@GenerateMocks([GetNowPlayingTv, GetPopularTv, GetTopRatedTv])
 void main() {
   late TvListNotifier provider;
   late MockGetNowPlayingTv mockGetNowPlayingTv;
@@ -25,31 +20,31 @@ void main() {
   late MockGetTopRatedTv mockGetTopRatedTv;
   late int listenerCallCount;
 
-  setUp((){
+  setUp(() {
     listenerCallCount = 0;
     mockGetNowPlayingTv = MockGetNowPlayingTv();
     mockGetPopularTv = MockGetPopularTv();
     mockGetTopRatedTv = MockGetTopRatedTv();
     provider = TvListNotifier(
-        getNowPlayingTv: mockGetNowPlayingTv,
-        getPopularTv: mockGetPopularTv,
-        getTopRatedTv: mockGetTopRatedTv,
+      getNowPlayingTv: mockGetNowPlayingTv,
+      getPopularTv: mockGetPopularTv,
+      getTopRatedTv: mockGetTopRatedTv,
     )..addListener(() {
-      listenerCallCount += 1;
-    });
+        listenerCallCount += 1;
+      });
   });
 
   final tTv = Tv(
-      backdropPath: "backdropPath",
-      genreIds: [1, 2, 3],
-      id: 1,
-      originalName: "originalName",
-      overview: "overview",
-      popularity: 1.0,
-      posterPath: "posterPath",
-      name: "name",
-      voteAverage: 1.0,
-      voteCount: 1,
+    backdropPath: "backdropPath",
+    genreIds: [1, 2, 3],
+    id: 1,
+    originalName: "originalName",
+    overview: "overview",
+    popularity: 1.0,
+    posterPath: "posterPath",
+    name: "name",
+    voteAverage: 1.0,
+    voteCount: 1,
   );
 
   final tTvList = <Tv>[tTv];
@@ -94,15 +89,13 @@ void main() {
 
   group('popular tv', () {
     test('should change state to loading when usecase is called', () async {
-      when(mockGetPopularTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetPopularTv.execute()).thenAnswer((_) async => Right(tTvList));
       provider.fetchPopularTv();
       expect(provider.popularTvState, RequestState.loading);
     });
 
     test('should change tv data when data is gotten successfully', () async {
-      when(mockGetPopularTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetPopularTv.execute()).thenAnswer((_) async => Right(tTvList));
       await provider.fetchPopularTv();
       expect(provider.popularTvState, RequestState.loaded);
       expect(provider.popularTv, tTvList);
@@ -121,15 +114,13 @@ void main() {
 
   group('top rated tv', () {
     test('should change state to loading when usecase is called', () async {
-      when(mockGetTopRatedTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
       provider.fetchTopRatedTv();
       expect(provider.topRatedTvState, RequestState.loading);
     });
 
     test('should change tv data when data is gotten successfully', () async {
-      when(mockGetTopRatedTv.execute())
-          .thenAnswer((_) async => Right(tTvList));
+      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvList));
       await provider.fetchTopRatedTv();
       expect(provider.topRatedTvState, RequestState.loaded);
       expect(provider.topRatedTv, tTvList);

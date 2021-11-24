@@ -9,8 +9,11 @@ abstract class TvListState extends Equatable {
 }
 
 class TvListInitial extends TvListState {}
+
 class TvListLoading extends TvListState {}
+
 class TvListLoaded extends TvListState {}
+
 class TvListError extends TvListState {
   final String message;
   TvListError(this.message);

@@ -35,12 +35,13 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
             } else if (state is TopRatedMovieLoaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = context.read<TopRatedMovieBloc>().topRated[index];
+                  final movie =
+                      context.read<TopRatedMovieBloc>().topRated[index];
                   return MovieCard(movie);
                 },
                 itemCount: context.read<TopRatedMovieBloc>().topRated.length,
               );
-            } else if (state is TopRatedMovieError){
+            } else if (state is TopRatedMovieError) {
               return Center(
                 key: Key('error_message'),
                 child: Text(state.message),
