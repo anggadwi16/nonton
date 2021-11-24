@@ -9,6 +9,7 @@ import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
@@ -31,6 +32,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -47,6 +49,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -63,6 +66,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -79,6 +83,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -95,6 +100,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -111,6 +117,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -124,6 +131,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       throw e;
     }
   }
@@ -135,6 +143,7 @@ class MovieRepositoryImpl implements MovieRepository {
           await localDataSource.removeWatchlist(MovieTable.fromEntity(movie));
       return Right(result);
     } on DatabaseException catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(DatabaseFailure(e.message));
     }
   }

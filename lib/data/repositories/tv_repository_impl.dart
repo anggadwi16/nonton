@@ -9,6 +9,7 @@ import 'package:ditonton/data/models/tv_table.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/domain/repositories/tv_repository.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 class TvRepositoryImpl implements TvRepository {
   final TvRemoteDataSource remoteDataSource;
@@ -29,6 +30,7 @@ class TvRepositoryImpl implements TvRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -45,6 +47,7 @@ class TvRepositoryImpl implements TvRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -61,6 +64,7 @@ class TvRepositoryImpl implements TvRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -77,6 +81,7 @@ class TvRepositoryImpl implements TvRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -93,6 +98,7 @@ class TvRepositoryImpl implements TvRepository {
     } on TlsException catch (e) {
       return Left(CommonFailure('Certificated not valid\n${e.message}'));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
     }
   }
@@ -116,6 +122,7 @@ class TvRepositoryImpl implements TvRepository {
           await localDataSource.removeWatchlist(TvTable.fromEntity(tv));
       return Right(result);
     } on DatabaseException catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       return Left(DatabaseFailure(e.message));
     }
   }
@@ -129,6 +136,7 @@ class TvRepositoryImpl implements TvRepository {
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
     } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
       throw e;
     }
   }
@@ -142,6 +150,11 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('Certificated not valid\n${e.message}'));
+    } catch (e) {
+      FirebaseCrashlytics.instance.log(e.toString());
+      return Left(CommonFailure(e.toString()));
     }
   }
 }
