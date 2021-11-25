@@ -1,7 +1,7 @@
 
-import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton/http_ssl_pinning.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tv/tv.dart';
 
 void main () {
   group('SSL Pinning', () {

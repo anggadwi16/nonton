@@ -43,6 +43,16 @@ dependencies:
   firebase_core: ^1.6.0
   firebase_crashlytics: ^2.3.0
 
+  core:
+    path: ./core
+  about:
+    path: ./about
+  tv:
+    path: ./tv
+  movie:
+    path: ./movie
+  watchlist:
+    path: ./watchlist
 
 dev_dependencies:
   mockito: ^5.0.8

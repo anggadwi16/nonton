@@ -1,0 +1,15 @@
+const ABOUT = '/about';
+ const MOVIE = '/movie';
+ const DETAIL_MOVIE = '/detail-movie';
+ const NOW_PLAYING_TV = '/now-playing-tv';
+ const POPULAR_MOVIE = '/popular-movie';
+ const POPULAR_TV = '/popular-tv';
+ const SEARCH_MOVIE = '/search-movie';
+ const TOP_RATED_MOVIE = '/top-rated-movie';
+ const TOP_RATED_TV = '/top-rated-tv';
+ const SEARCH_TV = '/search-tv';
+ const DETAIL_TV = '/detail-tv';
+ const TV_SERIES = "tv-series";
+ const WATCHLIST_MOVIE = '/watchlist-movie';
+ const WATCHLIST = '/watchlist';
+ const WATCHLIST_TV = '/watchlist-tv';
