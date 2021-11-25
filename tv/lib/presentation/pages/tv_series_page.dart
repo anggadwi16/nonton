@@ -1,16 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/presentation/bloc/tv_list_bloc.dart';
-import 'package:ditonton/presentation/pages/now_playing_tv_page.dart';
-import 'package:ditonton/presentation/pages/popular_tv_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_tv_page.dart';
-import 'package:ditonton/presentation/pages/tv_search_page.dart';
-import 'package:ditonton/presentation/pages/tv_series_detail_page.dart';
-import 'package:ditonton/presentation/widgets/movie_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:core/core.dart';
+import 'package:tv/tv.dart';
 
 class TVSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = "tv-series";
@@ -39,7 +32,7 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
           ),
         ],
       ),
-      drawer: MovieDrawer(),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: SingleChildScrollView(

@@ -1,10 +1,9 @@
-import 'package:ditonton/presentation/bloc/watchlist_tv_bloc.dart';
-import 'package:ditonton/presentation/pages/tv_series_detail_page.dart';
-import 'package:ditonton/presentation/widgets/empty_data.dart';
-import 'package:ditonton/presentation/widgets/tv_card.dart';
+
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:tv/tv.dart';
 
 class WatchlistTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-tv';
