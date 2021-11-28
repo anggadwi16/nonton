@@ -21,8 +21,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
-    } on TlsException catch (e) {
-      return Left(CommonFailure('Certificated not valid\n${e.message}'));
+    } on TlsException {
+      return Left(CommonFailure('Certificated not valid'));
     } catch (e) {
       FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
@@ -38,8 +38,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
-    } on TlsException catch (e) {
-      return Left(CommonFailure('Certificated not valid\n${e.message}'));
+    } on TlsException {
+      return Left(CommonFailure('Certificated not valid'));
     } catch (e) {
       FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
@@ -55,8 +55,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
-    } on TlsException catch (e) {
-      return Left(CommonFailure('Certificated not valid\n${e.message}'));
+    } on TlsException {
+      return Left(CommonFailure('Certificated not valid'));
     } catch (e) {
       FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
@@ -72,8 +72,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
-    } on TlsException catch (e) {
-      return Left(CommonFailure('Certificated not valid\n${e.message}'));
+    } on TlsException {
+      return Left(CommonFailure('Certificated not valid'));
     } catch (e) {
       FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
@@ -89,8 +89,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
-    } on TlsException catch (e) {
-      return Left(CommonFailure('Certificated not valid\n${e.message}'));
+    } on TlsException {
+      return Left(CommonFailure('Certificated not valid'));
     } catch (e) {
       FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));
@@ -117,7 +117,7 @@ class TvRepositoryImpl implements TvRepository {
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
-    }catch (e) {
+    } catch (e) {
       FirebaseCrashlytics.instance.log(e.toString());
       throw e;
     }
@@ -146,8 +146,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
-    } on TlsException catch (e) {
-      return Left(CommonFailure('Certificated not valid\n${e.message}'));
+    } on TlsException {
+      return Left(CommonFailure('Certificated not valid'));
     } catch (e) {
       FirebaseCrashlytics.instance.log(e.toString());
       return Left(CommonFailure(e.toString()));

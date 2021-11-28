@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
@@ -36,7 +35,16 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = context.read<PopularMovieBloc>().popular[index];
-                  return MovieCard(movie);
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        MovieDetailPage.ROUTE_NAME,
+                        arguments: movie.id,
+                      );
+                    },
+                    child: MovieCard(movie),
+                  );
                 },
                 itemCount: context.read<PopularMovieBloc>().popular.length,
               );

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +39,14 @@ class _PopularTvPageState extends State<PopularTvPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = context.read<PopularTvBloc>().popular[index];
-                  return TvCard(tv);
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, TvSeriesDetailPage.ROUTE_NAME,
+                          arguments: tv.id);
+                    },
+                    child: TvCard(tv),
+                  );
                 },
                 itemCount: context.read<PopularTvBloc>().popular.length,
               );

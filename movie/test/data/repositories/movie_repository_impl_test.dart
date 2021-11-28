@@ -102,6 +102,15 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return ssl connection failure get now playing movie',
+        () async {
+      when(mockRemoteDataSource.getNowPlayingMovies())
+          .thenThrow(TlsException());
+      final result = await repository.getNowPlayingMovies();
+      verify(mockRemoteDataSource.getNowPlayingMovies());
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
+    });
   });
 
   group('Popular Movies', () {
@@ -142,6 +151,13 @@ void main() {
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
     });
+
+    test('should return ssl connection failure popular movie', () async {
+      when(mockRemoteDataSource.getPopularMovies()).thenThrow(TlsException());
+      final result = await repository.getPopularMovies();
+      verify(mockRemoteDataSource.getPopularMovies());
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
+    });
   });
 
   group('Top Rated Movies', () {
@@ -180,6 +196,13 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test('should return ssl connection failure top rated movie', () async {
+      when(mockRemoteDataSource.getTopRatedMovies()).thenThrow(TlsException());
+      final result = await repository.getTopRatedMovies();
+      verify(mockRemoteDataSource.getTopRatedMovies());
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
     });
   });
 
@@ -248,6 +271,13 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return ssl connection failure get detail movie', () async {
+      when(mockRemoteDataSource.getMovieDetail(tId)).thenThrow(TlsException());
+      final result = await repository.getMovieDetail(tId);
+      verify(mockRemoteDataSource.getMovieDetail(tId));
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
+    });
   });
 
   group('Get Movie Recommendations', () {
@@ -294,6 +324,15 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return ssl connection failure get recommendation movie',
+        () async {
+      when(mockRemoteDataSource.getMovieRecommendations(tId))
+          .thenThrow(TlsException());
+      final result = await repository.getMovieRecommendations(tId);
+      verify(mockRemoteDataSource.getMovieRecommendations(tId));
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
+    });
   });
 
   group('Seach Movies', () {
@@ -334,6 +373,13 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test('should return ssl connection failure get search movie', () async {
+      when(mockRemoteDataSource.searchMovies(tQuery)).thenThrow(TlsException());
+      final result = await repository.searchMovies(tQuery);
+      verify(mockRemoteDataSource.searchMovies(tQuery));
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
     });
   });
 

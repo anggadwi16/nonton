@@ -9,7 +9,6 @@ import 'package:tv/tv.dart';
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
-
 void main() {
   late TvRepositoryImpl repository;
   late MockTvRemoteDataSource mockRemoteDataSource;
@@ -84,6 +83,13 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return ssl connection failure get now playing tv', () async {
+      when(mockRemoteDataSource.getNowPlayingTv()).thenThrow(TlsException());
+      final result = await repository.getNowPlayingTv();
+      verify(mockRemoteDataSource.getNowPlayingTv());
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
+    });
   });
 
   group('Popular TV', () {
@@ -116,6 +122,13 @@ void main() {
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
     });
+
+    test('should return ssl connection failure get popular tv', () async {
+      when(mockRemoteDataSource.getPopularTv()).thenThrow(TlsException());
+      final result = await repository.getPopularTv();
+      verify(mockRemoteDataSource.getPopularTv());
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
+    });
   });
 
   group('Top Rated Tv', () {
@@ -147,6 +160,13 @@ void main() {
       verify(mockRemoteDataSource.getTopRatedTv());
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test('should return ssl connection failure get top rated tv', () async {
+      when(mockRemoteDataSource.getTopRatedTv()).thenThrow(TlsException());
+      final result = await repository.getTopRatedTv();
+      verify(mockRemoteDataSource.getTopRatedTv());
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
     });
   });
 
@@ -209,6 +229,13 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return ssl connection failure get detail tv', () async {
+      when(mockRemoteDataSource.getTvDetail(tId)).thenThrow(TlsException());
+      final result = await repository.getDetailTv(tId);
+      verify(mockRemoteDataSource.getTvDetail(tId));
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
+    });
   });
 
   group('Get TV Recommendations', () {
@@ -244,6 +271,13 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return ssl connection failure get recommendation tv', () async {
+      when(mockRemoteDataSource.getTvRecommendations(tId)).thenThrow(TlsException());
+      final result = await repository.getRecommendationTv(tId);
+      verify(mockRemoteDataSource.getTvRecommendations(tId));
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
+    });
   });
 
   group('Search Tv', () {
@@ -277,6 +311,13 @@ void main() {
       verify(mockRemoteDataSource.searchTv(tQuery));
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test('should return ssl connection failure get search tv', () async {
+      when(mockRemoteDataSource.searchTv(tQuery)).thenThrow(TlsException());
+      final result = await repository.searchTv(tQuery);
+      verify(mockRemoteDataSource.searchTv(tQuery));
+      expect(result, equals(Left(CommonFailure('Certificated not valid'))));
     });
   });
 

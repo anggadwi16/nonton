@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
@@ -37,7 +36,16 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
                 itemBuilder: (context, index) {
                   final movie =
                       context.read<TopRatedMovieBloc>().topRated[index];
-                  return MovieCard(movie);
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        MovieDetailPage.ROUTE_NAME,
+                        arguments: movie.id,
+                      );
+                    },
+                    child: MovieCard(movie),
+                  );
                 },
                 itemCount: context.read<TopRatedMovieBloc>().topRated.length,
               );

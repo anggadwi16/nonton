@@ -65,7 +65,14 @@ class _TvSearchPageState extends State<TvSearchPage> {
                             padding: EdgeInsets.all(8),
                             itemBuilder: (context, index) {
                               final tv = result[index];
-                              return TvCard(tv);
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, TvSeriesDetailPage.ROUTE_NAME,
+                                      arguments: tv.id);
+                                },
+                                child: TvCard(tv),
+                              );
                             },
                             itemCount: result.length,
                           ),

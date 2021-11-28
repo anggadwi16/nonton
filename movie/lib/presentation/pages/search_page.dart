@@ -63,7 +63,16 @@ class _SearchPageState extends State<SearchPage> {
                             padding: const EdgeInsets.all(8),
                             itemBuilder: (context, index) {
                               final movie = result[index];
-                              return MovieCard(movie);
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    MovieDetailPage.ROUTE_NAME,
+                                    arguments: movie.id,
+                                  );
+                                },
+                                child: MovieCard(movie),
+                              );
                             },
                             itemCount: result.length,
                           ),

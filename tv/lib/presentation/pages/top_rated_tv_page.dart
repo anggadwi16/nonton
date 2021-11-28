@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +34,14 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = context.read<TopRatedTvBloc>().topRated[index];
-                  return TvCard(tv);
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, TvSeriesDetailPage.ROUTE_NAME,
+                          arguments: tv.id);
+                    },
+                    child: TvCard(tv),
+                  );
                 },
                 itemCount: context.read<TopRatedTvBloc>().topRated.length,
               );

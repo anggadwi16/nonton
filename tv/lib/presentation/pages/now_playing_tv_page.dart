@@ -39,7 +39,14 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = context.read<NowPlayingTvBloc>().nowPlaying[index];
-                  return TvCard(tv);
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, TvSeriesDetailPage.ROUTE_NAME,
+                          arguments: tv.id);
+                    },
+                    child: TvCard(tv),
+                  );
                 },
                 itemCount: context.read<NowPlayingTvBloc>().nowPlaying.length,
               );
